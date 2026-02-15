@@ -367,7 +367,5 @@ The SHG-CONNECT system will be considered successful when:
 4. Administrators can manage the SHG with full visibility and control
 5. All transactions are stored immutably on the blockchain
 6. Google Workspace integration provides seamless communication and documentation
-7. The system maintains 99.5% uptime during business hours
-8. User satisfaction score exceeds 4.0 out of 5.0 in post-deployment surveys
-9. Trust score calculations accurately reflect member behavior with less than 5% variance from manual calculations
-10. The system handles peak loads of 100 concurrent users without performance degradation
+7. Trust score calculations accurately reflect member behavior with less than 5% variance from manual calculations
+8. The system demonstrates improved transparency and trust compared to manual SHG record-keeping.
