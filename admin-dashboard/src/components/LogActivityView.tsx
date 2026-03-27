@@ -11,6 +11,7 @@ import { Calendar, DollarSign, Users as UsersIcon, CheckCircle2 } from "lucide-r
 import { useAuth } from "../AuthContext";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
+import { toast } from "sonner";
 import {
   setDoc,
   updateDoc,
@@ -38,6 +39,9 @@ export function LogActivityView() {
   const [shgName, setShgName] = useState<string>("");
   const [recentTransactions, setRecentTransactions] = useState<any[]>([]);
   
+const [startTime, setStartTime] = useState("");
+const [endTime, setEndTime] = useState("");
+
     interface Member {
       id: string;
        name: string;
@@ -72,6 +76,7 @@ export function LogActivityView() {
 
     useEffect(() => {
   if (!shgId) return;
+ 
 
   const fetchRecentMonthlyPayments = async () => {
     const roundsSnap = await getDocs(
@@ -113,6 +118,69 @@ export function LogActivityView() {
 
   fetchRecentMonthlyPayments();
 }, [shgId]);
+ const handleCreateMeeting = async () => {
+  console.log("🔥 Create Meeting clicked");
+
+  if (!meetingTopic || !meetingDate || !startTime || !endTime) {
+    toast.error("Please fill all meeting details");
+    return;
+  }
+
+  const startDateTime = `${meetingDate}T${startTime}:00`;
+  const endDateTime = `${meetingDate}T${endTime}:00`;
+
+  console.log("📅 Start:", startDateTime);
+  console.log("📅 End:", endDateTime);
+
+  const attendeeEmails = [
+    "1797.parth@gmail.com",
+    "parthkulkarni8406@gmail.com",
+    "kaustubhk6002@gmail.com",
+    "shriyashk06@gmail.com",
+  ];
+
+  console.log("📧 Attendees:", attendeeEmails);
+
+  try {
+    console.log("➡️ Sending request to backend");
+
+    const res = await fetch("http://localhost:5002/create-meet", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: meetingTopic,
+        description: `SHG Meeting: ${meetingTopic}`,
+        startTime: startDateTime,
+        endTime: endDateTime,
+        attendees: attendeeEmails,
+      }),
+    });
+
+    console.log("⬅️ Response status:", res.status);
+
+    const data = await res.json();
+    console.log("📨 Response data:", data);
+
+    if (!res.ok) {
+      throw new Error(data.error || "Failed to create meeting");
+    }
+
+    toast.success("Meeting created & emails sent 🎉");
+
+    setMeetingTopic("");
+    setMeetingDate("");
+    setStartTime("");
+    setEndTime("");
+
+    if (data.meetLink) {
+      window.open(data.meetLink, "_blank");
+    }
+  } catch (err: any) {
+    console.error("❌ Create Meet Error:", err);
+    toast.error(err.message || "Something went wrong");
+  }
+};
+
 
 const getMemberName = (uid: string) => {
   const member = members.find((m: any) => m.id === uid);
@@ -156,9 +224,8 @@ const getMemberName = (uid: string) => {
   // 3️⃣ Update attendance for each member
   for (const docSnap of membersSnap.docs) {
     const data = docSnap.data();
-    const name = data.name;
-
-    const present = attendance[name] === true;
+    const memberId = docSnap.id;
+const present = attendance[memberId] === true;
 
     const presentCount =
       (data.attendancePresent ?? 0) + (present ? 1 : 0);
@@ -200,76 +267,75 @@ const getMemberName = (uid: string) => {
         <div className="col-span-2 space-y-6">
           {/* Financial Entry Card */}
           <Card className="border-teal-100">
-            <CardHeader className="bg-gradient-to-r from-teal-50 to-blue-50">
-              <div className="flex items-center gap-2">
-                <DollarSign className="w-5 h-5 text-teal-600" />
-                <CardTitle className="text-teal-900">Financial Transaction Entry</CardTitle>
-              </div>
-              <CardDescription>Record savings, loan disbursements, or repayments</CardDescription>
-            </CardHeader>
-            <CardContent className="pt-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="member">Member Name</Label>
-                  <Select value={selectedMember} onValueChange={setSelectedMember}>
-                    <SelectTrigger id="member">
-                      <SelectValue placeholder="Select member" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {members.map((member) => (
-                      <SelectItem key={member.id} value={member.id}>
-                        {member.name}
-                      </SelectItem>
-                    ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+  <CardHeader className="bg-gradient-to-r from-teal-50 to-blue-50">
+    <div className="flex items-center gap-2">
+      <Calendar className="w-5 h-5 text-teal-600" />
+      <CardTitle className="text-teal-900">Create Meeting</CardTitle>
+    </div>
+    <CardDescription>
+      Create a meeting and notify all members
+    </CardDescription>
+  </CardHeader>
 
-                <div className="space-y-2">
-                  <Label htmlFor="amount">Amount (₹)</Label>
-                  <Input
-                    id="amount"
-                    type="number"
-                    placeholder="0.00"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                  />
-                </div>
+  <CardContent className="pt-6 space-y-4">
+    <div className="grid grid-cols-2 gap-4">
+      
+      {/* 1️⃣ Meeting Topic */}
+      <div className="space-y-2 col-span-2">
+        <Label htmlFor="topic">Meeting Topic</Label>
+        <Input
+          id="topic"
+          placeholder="e.g. Monthly Savings Discussion"
+          value={meetingTopic}
+          onChange={(e) => setMeetingTopic(e.target.value)}
+        />
+      </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="type">Transaction Type</Label>
-                  <Select value={transactionType} onValueChange={setTransactionType}>
-                    <SelectTrigger id="type">
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="savings">Savings</SelectItem>
-                      <SelectItem value="repayment">Loan Repayment</SelectItem>
-                      <SelectItem value="disbursed">Loan Disbursed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+      {/* 2️⃣ Date */}
+      <div className="space-y-2">
+        <Label htmlFor="date">Date</Label>
+        <Input
+          id="date"
+          type="date"
+          value={meetingDate}
+          onChange={(e) => setMeetingDate(e.target.value)}
+        />
+      </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="date">Date</Label>
-                  <Input
-                    id="date"
-                    type="date"
-                    value={transactionDate}
-                    onChange={(e) => setTransactionDate(e.target.value)}
-                  />
-                </div>
-              </div>
+      {/* 3️⃣ Start Time */}
+      <div className="space-y-2">
+        <Label htmlFor="startTime">Start Time</Label>
+        <Input
+          id="startTime"
+          type="time"
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
+        />
+      </div>
 
-              <Button 
-                onClick={handleRecordTransaction}
-                className="w-full bg-teal-600 hover:bg-teal-700"
-              >
-                <CheckCircle2 className="w-4 h-4 mr-2" />
-                Record Financial Transaction
-              </Button>
-            </CardContent>
-          </Card>
+      {/* 4️⃣ End Time */}
+      <div className="space-y-2">
+        <Label htmlFor="endTime">End Time</Label>
+        <Input
+          id="endTime"
+          type="time"
+          value={endTime}
+          onChange={(e) => setEndTime(e.target.value)}
+        />
+      </div>
+    </div>
+
+    {/* 🔔 Notify Button */}
+    <Button
+      onClick={handleCreateMeeting}
+      className="w-full bg-teal-600 hover:bg-teal-700"
+    >
+      <CheckCircle2 className="w-4 h-4 mr-2" />
+      Notify All Members
+    </Button>
+  </CardContent>
+</Card>
+
 
           {/* Meeting Attendance Card */}
           <Card className="border-blue-100">
