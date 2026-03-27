@@ -21,7 +21,6 @@ import { getContract, getReadContract, decodeRepaymentTx } from "./blockchain";
 import { ethers } from "ethers";
 
 
-
 interface Loan {
   id: string;
   amount: number;
@@ -141,41 +140,112 @@ function calculateEligibleAmount(
   );
 }
 
+// const markEmiPaid = async (
+//   loanId: string,
+//   emiAmount: number,
+//   hash: string,
+//   monthIndex?: number
+// ) => {
+//     const loanRef = doc(db, "ShgGroups", shgId!, "loans", loanId);
+//     const snap = await getDoc(loanRef);
 
+//     if (!snap.exists()) return;
 
-  const markEmiPaid = async (loanId: string, emiAmount: number, hash: string) => {
-    const loanRef = doc(db, "ShgGroups", shgId!, "loans", loanId);
+//     const loan = snap.data();
+//     const dueDates = [...loan.dueDates];
+
+//    const currentIndex =
+//   monthIndex !== undefined
+//     ? monthIndex
+//     : getCurrentEmiIndex(dueDates);
+//     if (currentIndex === -1) return; // already fully paid
+
+//     // mark EMI paid
+//     dueDates[currentIndex] = {
+//       ...dueDates[currentIndex],
+//       paid: true,
+//       paidAt: Timestamp.now(),   // 🔥 EMI payment time
+//       txHash: hash,            // 🔥 blockchain tx hash
+//     };
+
+//     const newPaidAmount = loan.paidAmount + emiAmount;
+//     const newRemaining = loan.remainingAmount - emiAmount;
+
+//     const allPaid = dueDates.every((d: any) => d.paid);
+
+//     await updateDoc(loanRef, {
+//       dueDates,
+//       paidAmount: newPaidAmount,
+//       remainingAmount: Math.max(newRemaining, 0),
+//       status: allPaid ? "COMPLETED" : "APPROVED",
+//     });
+//   };
+
+const markEmiPaid = async (
+  loanId: string,
+  emiAmount: number,
+  hash: string,
+  monthIndex?: number
+) => {
+  try {
+    if (!shgId) return;
+
+    const loanRef = doc(db, "ShgGroups", shgId, "loans", loanId);
     const snap = await getDoc(loanRef);
 
     if (!snap.exists()) return;
 
     const loan = snap.data();
-    const dueDates = [...loan.dueDates];
+    const dueDates = [...(loan.dueDates || [])];
 
-    const currentIndex = getCurrentEmiIndex(dueDates);
-    if (currentIndex === -1) return; // already fully paid
+    // ✅ determine correct EMI index
+    const currentIndex =
+      monthIndex !== undefined
+        ? monthIndex
+        : getCurrentEmiIndex(dueDates);
 
-    // mark EMI paid
+    if (currentIndex === -1) {
+      console.log("⚠️ All EMIs already paid");
+      return;
+    }
+
+    // ❌ prevent duplicate payment
+    if (dueDates[currentIndex]?.paid) {
+      console.log("⚠️ EMI already paid at index:", currentIndex);
+      return;
+    }
+
+    // ✅ update EMI
     dueDates[currentIndex] = {
       ...dueDates[currentIndex],
       paid: true,
-      paidAt: Timestamp.now(),   // 🔥 EMI payment time
-      txHash: hash,            // 🔥 blockchain tx hash
+      paidAt: Timestamp.now(),
+      txHash: hash || "0",
     };
 
-    const newPaidAmount = loan.paidAmount + emiAmount;
-    const newRemaining = loan.remainingAmount - emiAmount;
+    // ✅ safe calculations
+    const newPaidAmount = (loan.paidAmount || 0) + emiAmount;
+    const newRemaining = (loan.remainingAmount || 0) - emiAmount;
 
     const allPaid = dueDates.every((d: any) => d.paid);
 
     await updateDoc(loanRef, {
-      dueDates,
+      dueDates: JSON.parse(JSON.stringify(dueDates)), // ✅ FORCE DEEP WRITE
       paidAmount: newPaidAmount,
       remainingAmount: Math.max(newRemaining, 0),
       status: allPaid ? "COMPLETED" : "APPROVED",
     });
-  };
 
+    console.log("✅ EMI UPDATED SUCCESSFULLY:", {
+      loanId,
+      index: currentIndex,
+      amount: emiAmount,
+    });
+
+  } catch (err) {
+    console.error("❌ markEmiPaid ERROR:", err);
+  }
+};
 
   const fetchUserPhone = async () => {
     if (!uid) return null;
@@ -333,7 +403,7 @@ function calculateEligibleAmount(
       console.error("❌ loadRepayments failed:", err);
     }
   };
-
+  
   const payEMI = async () => {
     try {
       setStatus("Waiting for wallet...");
@@ -354,6 +424,109 @@ function calculateEligibleAmount(
       return null;
     }
   };
+
+//   const handleCashPayment = async (emiId) => {
+//   const phone = await fetchUserPhone();
+
+//   await fetch("http://localhost:5001/send-otp", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({
+//       phone,
+//       emiId
+//     })
+//   });
+
+//   toast.success("OTP sent. Give it to agent after payment.");
+// };
+
+// const handleCashPayment = async (emiId: string) => {
+//   try {
+//     const phone = await fetchUserPhone();
+
+//     if (!phone) {
+//       toast.error("Phone number not found");
+//       return;
+//     }
+
+//     const res = await fetch("http://localhost:5001/send-otp", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         phone,
+//         emiId,
+//       }),
+//     });
+
+//     const data = await res.json();
+
+//     if (data.success) {
+//       toast.success("OTP sent. Give it to agent after payment.");
+//     } else {
+//       toast.error("Failed to send OTP");
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     toast.error("Error sending OTP");
+//   }
+// };
+
+const handleCashPayment = async (loan: any) => {
+  try {
+    const phone = await fetchUserPhone();
+
+    if (!phone) {
+      toast.error("Phone number not found");
+      return;
+    }
+    const dueDates = loan.dueDates || [];
+
+    const currentIndex = dueDates.findIndex((d: any) => !d.paid);
+
+    if (currentIndex === -1) {
+      toast.error("All EMIs already paid");
+      return;
+    }
+    // 🔥 1. CREATE TRANSACTION IN FIRESTORE
+    await addDoc(collection(db, "transactions"), {
+      memberId: uid,
+      loanId: loan.id,
+      emiId: loan.id, // (you are using loan.id as emiId)
+      amount: loan.emi, // 🔥 REAL EMI AMOUNT
+      monthIndex: currentIndex,
+      mode: "CASH",
+      status: "PENDING",
+      phone,
+      shgId,
+      createdAt: serverTimestamp(),
+    });
+
+    // 🔥 2. SEND OTP
+    const res = await fetch("http://localhost:5001/send-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        phone,
+        emiId: loan.id,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      toast.success("OTP sent. Give it to admin after payment.");
+    } else {
+      toast.error("Failed to send OTP");
+    }
+  } catch (err) {
+    console.error(err);
+    toast.error("Error sending OTP");
+  }
+};
 
   const mappedLoans = loans2.map((loan) => {
     const nextDueDate = (() => {
@@ -784,6 +957,10 @@ function calculateEligibleAmount(
                               ? "✅ Paid"
                               : `Pay ₹${loan.emi}`}
                         </Button>
+
+                        <Button onClick={() => handleCashPayment(loan)}>
+  Pay via Cash
+</Button>
 
                       </div>
                     </div>

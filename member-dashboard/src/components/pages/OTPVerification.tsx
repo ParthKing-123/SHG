@@ -8,11 +8,13 @@ import { OTP_BACKEND_URL } from "../../config";
 interface OTPVerificationProps {
   phoneNumber: string;
   onVerified: () => void;
+  emiId?: string;
 }
 
 export default function OTPVerification({
   phoneNumber,
   onVerified,
+  emiId = "emi123",
 }: OTPVerificationProps) {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,10 +28,11 @@ export default function OTPVerification({
     try {
       console.log("Sending OTP to:", phoneNumber);
 
-      const res = await fetch(`${OTP_BACKEND_URL}/send-otp`, {
+      // const res = await fetch(`${OTP_BACKEND_URL}/send-otp`, {
+      const res = await fetch("http://localhost:5001/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: phoneNumber }),
+        body: JSON.stringify({ phone: phoneNumber, emiId }),
       });
 
       const data = await res.json();
@@ -47,12 +50,16 @@ const verifyOtp = async () => {
     return;
   }
 
-  setLoading(true);
   try {
-    const res = await fetch(`${OTP_BACKEND_URL}/verify-otp`, {
+    // const res = await fetch(`${OTP_BACKEND_URL}/verify-otp`, {
+    const res = await fetch("http://localhost:5001/verify-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone: phoneNumber, otp }),
+      body: JSON.stringify({
+  phone: phoneNumber,
+  otp,
+  emiId
+})
     });
 
     const data = await res.json();

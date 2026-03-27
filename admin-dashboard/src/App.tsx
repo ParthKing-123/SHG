@@ -254,6 +254,7 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "./components/firebase";
 import { Member, MembersContext, } from "./MembersContext";
 import { MonthlyRound } from "./components/pages/MonthlyRound.tsx";
+import  TransactionsView  from "./components/TransactionsView.tsx";
 
 export default function App() {
   // const [user, setUser] = useState<User | null>(null);
@@ -340,8 +341,8 @@ useEffect(() => {
     }
   };
 
-  const handleSelectMember = (memberId: number) => {
-    setSelectedMemberId(memberId);
+  const handleSelectMember = (memberId: string) => {
+    setSelectedMemberId(Number(memberId));
     setActiveView("member-profile");
   };
 
@@ -356,13 +357,15 @@ useEffect(() => {
     case "members":
       return <MembersListView onSelectMember={handleSelectMember} />;
     case "member-profile":
-      return <MemberProfileView memberId={selectedMemberId} />;
+      return <MemberProfileView memberId={selectedMemberId ? String(selectedMemberId) : null} />;
     case "reports":
       return <ReportsView />;
     case "settings":
       return <SettingsView />;
     case "loan-approvals":
       return <LoanApprovalsView />;
+    case "transactions":
+      return <TransactionsView />;
     default:
       return <DashboardView />;
   }

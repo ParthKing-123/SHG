@@ -39,8 +39,11 @@ export function Sidebar({ activeView, onNavigate, onLogout }: SidebarProps) {
     { id: "loan-approvals", label: "Loan Approvals", icon: FileText },
     { id: "reports", label: "Reports", icon: FileText },
     { id: "monthly-round", label: "Monthly Round", icon: Wallet },
+    { id: "transactions", label: "Transactions", icon: Wallet },
     { id: "settings", label: "Settings", icon: Settings },
-    {id: "logout", label: "Logout", icon: LogOut}
+    {id: "logout", label: "Logout", icon: LogOut},
+    
+
   ];
 
   return (
