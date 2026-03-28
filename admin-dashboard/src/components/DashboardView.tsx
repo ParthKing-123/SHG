@@ -6,6 +6,7 @@ import { useMembers } from "../MembersContext";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "./firebase";
 import { useAuth } from "../AuthContext";
+import { useLanguage } from "../LanguageContext";
 import { useEffect, useState } from "react";
 
 
@@ -49,8 +50,9 @@ const loanRepaymentData = [
 
 
 export function DashboardView() {
-  const { members} = useMembers();
-   const { shgId } = useAuth();
+  const { members } = useMembers();
+  const { shgId } = useAuth();
+  const { t } = useLanguage();
 
   const [totalSavings, setTotalSavings] = useState(0);
   const [activeLoanAmount, setActiveLoanAmount] = useState(0);
@@ -113,110 +115,101 @@ export function DashboardView() {
 
   const [monthlyChartData, setMonthlyChartData] = useState<any[]>([]);
   const getMonthKey = (timestamp: any) => {
-  const date = timestamp.toDate();
-  return date.toLocaleString("en-US", { month: "short" });
-};
-const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-
-useEffect(() => {
-  if (!shgId) return;
-
-  const fetchMonthlyGraphData = async () => {
-    const monthlyMap: any = {};
-
-    // ---------------- SAVINGS ----------------
-    const roundsSnap = await getDocs(
-      collection(db, "ShgGroups", shgId, "monthlyRounds")
-    );
-
-    for (const round of roundsSnap.docs) {
-      const contribSnap = await getDocs(
-        collection(
-          db,
-          "ShgGroups",
-          shgId,
-          "monthlyRounds",
-          round.id,
-          "contributions"
-        )
-      );
-
-      contribSnap.forEach((doc) => {
-        const data = doc.data();
-        if (!data.paidAt) return;
-
-        const month = getMonthKey(data.paidAt);
-        if (!monthlyMap[month]) {
-          monthlyMap[month] = { month, savings: 0, loans: 0, repayments: 0 };
-        }
-        monthlyMap[month].savings += data.amountPaid || 0;
-      });
-    }
-
-    // ---------------- LOANS DISBURSED ----------------
-    const loansSnap = await getDocs(
-      query(
-        collection(db, "ShgGroups", shgId, "loans"),
-        where("status", "==", "APPROVED")
-      )
-    );
-
-    loansSnap.forEach((doc) => {
-      const data = doc.data();
-      if (!data.disbursedAt) return;
-
-      const month = getMonthKey(data.disbursedAt);
-      if (!monthlyMap[month]) {
-        monthlyMap[month] = { month, savings: 0, loans: 0, repayments: 0 };
-      }
-      monthlyMap[month].loans += data.amount || 0;
-    });
-
-    // ---------------- REPAYMENTS ----------------
-    for (const loan of loansSnap.docs) {
-      const repaySnap = await getDocs(
-        collection(
-          db,
-          "ShgGroups",
-          shgId,
-          "loans",
-          loan.id,
-          "repayments"
-        )
-      );
-
-      repaySnap.forEach((doc) => {
-        const data = doc.data();
-        if (!data.paidAt) return;
-
-        const month = getMonthKey(data.paidAt);
-        if (!monthlyMap[month]) {
-          monthlyMap[month] = { month, savings: 0, loans: 0, repayments: 0 };
-        }
-        monthlyMap[month].repayments += data.amount || 0;
-      });
-    }
-    const normalizedData = MONTHS.map((month) => ({
-  month,
-  savings: monthlyMap[month]?.savings || 0,
-  repayments: monthlyMap[month]?.repayments || 0,
-  loans: monthlyMap[month]?.loans || 0,
-}));
-
-setMonthlyChartData(normalizedData);
-    //setMonthlyChartData(Object.values(monthlyMap));
+    const date = typeof timestamp.toDate === "function" ? timestamp.toDate() : new Date(timestamp.seconds ? timestamp.seconds * 1000 : timestamp);
+    return date.toLocaleString("en-US", { month: "short" });
   };
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-  fetchMonthlyGraphData();
-}, [shgId]);
+
+  useEffect(() => {
+    if (!shgId) return;
+
+    const fetchMonthlyGraphData = async () => {
+      const monthlyMap: any = {};
+
+      // ---------------- SAVINGS ----------------
+      const roundsSnap = await getDocs(
+        collection(db, "ShgGroups", shgId, "monthlyRounds")
+      );
+
+      for (const round of roundsSnap.docs) {
+        const contribSnap = await getDocs(
+          collection(
+            db,
+            "ShgGroups",
+            shgId,
+            "monthlyRounds",
+            round.id,
+            "contributions"
+          )
+        );
+
+        contribSnap.forEach((doc) => {
+          const data = doc.data();
+          if (!data.paidAt) return;
+
+          const month = getMonthKey(data.paidAt);
+          if (!monthlyMap[month]) {
+            monthlyMap[month] = { month, savings: 0, loans: 0, repayments: 0 };
+          }
+          monthlyMap[month].savings += data.amountPaid || 0;
+        });
+      }
+
+      // ---------------- LOANS DISBURSED ----------------
+      const loansSnap = await getDocs(
+        query(
+          collection(db, "ShgGroups", shgId, "loans"),
+          where("status", "==", "APPROVED")
+        )
+      );
+
+      loansSnap.forEach((doc) => {
+        const data = doc.data();
+        if (!data.disbursedAt) return;
+
+        const month = getMonthKey(data.disbursedAt);
+        if (!monthlyMap[month]) {
+          monthlyMap[month] = { month, savings: 0, loans: 0, repayments: 0 };
+        }
+        monthlyMap[month].loans += data.amount || 0;
+      });
+
+      // ---------------- REPAYMENTS ----------------
+      loansSnap.forEach((doc) => {
+        const loanData = doc.data();
+        if (loanData.dueDates) {
+          loanData.dueDates.forEach((d: any) => {
+            if (d.paid && d.paidAt) {
+              const month = getMonthKey(d.paidAt);
+              if (!monthlyMap[month]) {
+                monthlyMap[month] = { month, savings: 0, loans: 0, repayments: 0 };
+              }
+              monthlyMap[month].repayments += loanData.emiAmount || loanData.emi || 0;
+            }
+          });
+        }
+      });
+      const normalizedData = MONTHS.map((month) => ({
+        month,
+        savings: monthlyMap[month]?.savings || 0,
+        repayments: monthlyMap[month]?.repayments || 0,
+        loans: monthlyMap[month]?.loans || 0,
+      }));
+
+      setMonthlyChartData(normalizedData);
+      //setMonthlyChartData(Object.values(monthlyMap));
+    };
+
+    fetchMonthlyGraphData();
+  }, [shgId]);
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-gray-900">Dashboard</h1>
-        <p className="text-gray-600">SHG performance metrics and analytics</p>
+        <h1 className="text-gray-900">{t("title", "dashboard")}</h1>
+        <p className="text-gray-600">{t("subtitle", "dashboard")}</p>
       </div>
 
       {/* Key Metrics Cards */}
@@ -225,11 +218,11 @@ setMonthlyChartData(normalizedData);
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Members</p>
+                <p className="text-sm text-gray-600">{t("total_members", "dashboard")}</p>
                 <p className="text-3xl text-teal-700 mt-1">{members.length}</p>
                 <div className="flex items-center gap-1 mt-2">
                   <TrendingUp className="w-4 h-4 text-green-600" />
-                  <span className="text-xs text-green-600">+5 this month</span>
+                  <span className="text-xs text-green-600">{t("this_month", "dashboard")}</span>
                 </div>
               </div>
               <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
@@ -243,12 +236,12 @@ setMonthlyChartData(normalizedData);
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Savings</p>
+                <p className="text-sm text-gray-600">{t("total_savings", "dashboard")}</p>
                 <p className="text-3xl text-green-700 mt-1">₹{totalSavings.toLocaleString("en-IN")}</p>
 
                 <div className="flex items-center gap-1 mt-2">
                   <TrendingUp className="w-4 h-4 text-green-600" />
-                  <span className="text-xs text-green-600">+12% vs last month</span>
+                  <span className="text-xs text-green-600">{t("vs_last_month", "dashboard")}</span>
                 </div>
               </div>
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
@@ -262,12 +255,12 @@ setMonthlyChartData(normalizedData);
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Active Loans</p>
-                <p className="text-3xl text-blue-700 mt-1">₹{activeLoanAmount.toLocaleString("en-IN")}</p>
+                <p className="text-sm text-gray-600">{t("active_loans", "dashboard")}</p>
+                <p className="text-3xl text-blue-700 mt-1">₹{(activeLoanAmount / 100).toLocaleString("en-IN")}</p>
 
                 <div className="flex items-center gap-1 mt-2">
                   <TrendingDown className="w-4 h-4 text-green-600" />
-                  <span className="text-xs text-green-600">-8% repayments</span>
+                  <span className="text-xs text-green-600">{t("repayments", "dashboard")}</span>
                 </div>
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -281,11 +274,11 @@ setMonthlyChartData(normalizedData);
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Avg Trust Score</p>
+                <p className="text-sm text-gray-600">{t("avg_trust_score", "dashboard")}</p>
                 <p className="text-3xl text-purple-700 mt-1">87.5</p>
                 <div className="flex items-center gap-1 mt-2">
                   <TrendingUp className="w-4 h-4 text-green-600" />
-                  <span className="text-xs text-green-600">+2.3 points</span>
+                  <span className="text-xs text-green-600">{t("points_diff", "dashboard")}</span>
                 </div>
               </div>
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -301,8 +294,8 @@ setMonthlyChartData(normalizedData);
         {/* Monthly Financial Activity */}
         <Card className="col-span-2">
           <CardHeader>
-            <CardTitle>Monthly Financial Activity</CardTitle>
-            <CardDescription>Savings, loans disbursed, and repayments over time</CardDescription>
+            <CardTitle>{t("monthly_financial_activity", "dashboard")}</CardTitle>
+            <CardDescription>{t("desc_monthly_activity", "dashboard")}</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -310,14 +303,14 @@ setMonthlyChartData(normalizedData);
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="month" stroke="#6b7280" />
                 <YAxis stroke="#6b7280" />
-                <Tooltip 
+                <Tooltip
                   contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
                   formatter={(value) => `₹${(value as number).toLocaleString()}`}
                 />
                 <Legend />
-                <Area type="monotone" dataKey="savings" stackId="1" stroke="#10b981" fill="#10b981" fillOpacity={0.6} name="Savings" />
-                <Area type="monotone" dataKey="repayments" stackId="1" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} name="Repayments" />
-                <Area type="monotone" dataKey="loans" stackId="1" stroke="#f59e0b" fill="#f59e0b" fillOpacity={0.6} name="Loans Disbursed" />
+                <Area type="monotone" dataKey="savings" stackId="1" stroke="#10b981" fill="#10b981" fillOpacity={0.6} name={t("savings", "dashboard")} />
+                <Area type="monotone" dataKey="repayments" stackId="1" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} name={t("repayments_chart", "dashboard")} />
+                <Area type="monotone" dataKey="loans" stackId="1" stroke="#f59e0b" fill="#f59e0b" fillOpacity={0.6} name={t("loans_disbursed", "dashboard")} />
               </AreaChart>
             </ResponsiveContainer>
           </CardContent>
@@ -326,8 +319,8 @@ setMonthlyChartData(normalizedData);
         {/* Trust Score Distribution */}
         <Card>
           <CardHeader>
-            <CardTitle>Trust Score Distribution</CardTitle>
-            <CardDescription>Member distribution by score range</CardDescription>
+            <CardTitle>{t("trust_score_distribution", "dashboard")}</CardTitle>
+            <CardDescription>{t("desc_trust_distribution", "dashboard")}</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -356,7 +349,7 @@ setMonthlyChartData(normalizedData);
                     <div className="w-3 h-3 rounded" style={{ backgroundColor: item.color }} />
                     <span className="text-gray-700">{item.range}</span>
                   </div>
-                  <span className="text-gray-900">{item.count} members</span>
+                  <span className="text-gray-900">{item.count} {t("members_count", "dashboard")}</span>
                 </div>
               ))}
             </div>
@@ -369,8 +362,8 @@ setMonthlyChartData(normalizedData);
         {/* Loan Repayment Status */}
         <Card>
           <CardHeader>
-            <CardTitle>Loan Repayment Status</CardTitle>
-            <CardDescription>On-time vs late vs defaulted repayments (%)</CardDescription>
+            <CardTitle>{t("loan_repayment_status", "dashboard")}</CardTitle>
+            <CardDescription>{t("desc_loan_repayment", "dashboard")}</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -378,14 +371,14 @@ setMonthlyChartData(normalizedData);
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="month" stroke="#6b7280" />
                 <YAxis stroke="#6b7280" />
-                <Tooltip 
+                <Tooltip
                   contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
                   formatter={(value) => `${value}%`}
                 />
                 <Legend />
-                <Bar dataKey="onTime" fill="#10b981" name="On Time" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="late" fill="#f59e0b" name="Late" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="defaulted" fill="#ef4444" name="Defaulted" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="onTime" fill="#10b981" name={t("on_time", "dashboard")} radius={[4, 4, 0, 0]} />
+                <Bar dataKey="late" fill="#f59e0b" name={t("late", "dashboard")} radius={[4, 4, 0, 0]} />
+                <Bar dataKey="defaulted" fill="#ef4444" name={t("defaulted", "dashboard")} radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -394,8 +387,8 @@ setMonthlyChartData(normalizedData);
         {/* Meeting Attendance Trend */}
         <Card>
           <CardHeader>
-            <CardTitle>Meeting Attendance Trend</CardTitle>
-            <CardDescription>Average attendance percentage per month</CardDescription>
+            <CardTitle>{t("meeting_attendance_trend", "dashboard")}</CardTitle>
+            <CardDescription>{t("desc_meeting_attendance", "dashboard")}</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -403,18 +396,18 @@ setMonthlyChartData(normalizedData);
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="month" stroke="#6b7280" />
                 <YAxis domain={[80, 100]} stroke="#6b7280" />
-                <Tooltip 
+                <Tooltip
                   contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
                   formatter={(value) => `${value}%`}
                 />
                 <Legend />
-                <Line 
-                  type="monotone" 
-                  dataKey="attendance" 
-                  stroke="#3b82f6" 
+                <Line
+                  type="monotone"
+                  dataKey="attendance"
+                  stroke="#3b82f6"
                   strokeWidth={3}
                   dot={{ fill: '#3b82f6', r: 5 }}
-                  name="Attendance Rate"
+                  name={t("attendance_rate", "dashboard")}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -428,9 +421,9 @@ setMonthlyChartData(normalizedData);
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">This Month</p>
-                <p className="text-2xl text-gray-900 mt-1">156 Transactions</p>
-                <Badge className="mt-2 bg-teal-600">+18% vs last month</Badge>
+                <p className="text-sm text-gray-600">{t("this_month_stats", "dashboard")}</p>
+                <p className="text-2xl text-gray-900 mt-1">156 {t("transactions_count", "dashboard")}</p>
+                <Badge className="mt-2 bg-teal-600">{t("percent_vs_last_month", "dashboard")}</Badge>
               </div>
             </div>
           </CardContent>
@@ -440,9 +433,9 @@ setMonthlyChartData(normalizedData);
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Repayment Rate</p>
+                <p className="text-sm text-gray-600">{t("repayment_rate", "dashboard")}</p>
                 <p className="text-2xl text-gray-900 mt-1">96%</p>
-                <Badge className="mt-2 bg-green-600">Excellent</Badge>
+                <Badge className="mt-2 bg-green-600">{t("excellent", "dashboard")}</Badge>
               </div>
             </div>
           </CardContent>
@@ -452,9 +445,9 @@ setMonthlyChartData(normalizedData);
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Group Health Score</p>
+                <p className="text-sm text-gray-600">{t("group_health_score", "dashboard")}</p>
                 <p className="text-2xl text-gray-900 mt-1">A+</p>
-                <Badge className="mt-2 bg-blue-600">Top Performing</Badge>
+                <Badge className="mt-2 bg-blue-600">{t("top_performing", "dashboard")}</Badge>
               </div>
             </div>
           </CardContent>

@@ -12,6 +12,7 @@ interface DashboardProps {
   memberData: any;
 }
 import { AuthContext, useAuth } from "../AuthContext";
+import { useLanguage } from "../../LanguageContext";
 import { collection, getDocs } from "firebase/firestore";
 import { Chatbot } from "../ChatBot";
 export function Dashboard({ memberData }: DashboardProps) {
@@ -30,6 +31,7 @@ const [loanRepaymentScore, setLoanRepaymentScore] = useState(0);
 const [totalTrustScore, setTotalTrustScore] = useState(0);
 
   const { shgId, uid} = useAuth();
+  const { t } = useLanguage();
    useEffect(() => {
   if (!shgId || !uid) return;
 
@@ -247,8 +249,15 @@ useEffect(() => {
         loan.dueDates.forEach((d: any) => {
           totalEmis++;
           if (d.paid && d.paidAt && d.date) {
-            if (d.paidAt.toDate() <= d.date.toDate()) {
-              onTimeEmis++;
+            try {
+              let paidDate = typeof d.paidAt.toDate === "function" ? d.paidAt.toDate() : new Date(d.paidAt.seconds ? d.paidAt.seconds * 1000 : d.paidAt);
+              let dueDate = typeof d.date.toDate === "function" ? d.date.toDate() : new Date(d.date.seconds ? d.date.seconds * 1000 : d.date);
+
+              if (paidDate <= dueDate) {
+                onTimeEmis++;
+              }
+            } catch (e) {
+              console.error("Failed to parse EMI dates", e);
             }
           }
         });
@@ -320,7 +329,7 @@ useEffect(() => {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Member Since</p>
+                <p className="text-sm text-gray-600">{t("member_since", "dashboard")}</p>
                 <p className="text-2xl text-gray-900">{memberData.memberSince}</p>
               </div>
               <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
@@ -334,7 +343,7 @@ useEffect(() => {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Monthly Contribution</p>
+                <p className="text-sm text-gray-600">{t("monthly_contribution", "dashboard")}</p>
                 <p className="text-2xl text-gray-900">₹{totalContributed.toLocaleString("en-IN")}</p>
               </div>
               <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
@@ -350,7 +359,7 @@ useEffect(() => {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Group Rank</p>
+                <p className="text-sm text-gray-600">{t("group_rank", "dashboard")}</p>
                 <p className="text-2xl text-gray-900">3rd of {memberData.groupStats.totalMembers}</p>
               </div>
               <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
@@ -385,7 +394,7 @@ useEffect(() => {
       {/* Trust Score History Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>Trust Score Trend</CardTitle>
+          <CardTitle>{t("trust_score_trend", "dashboard")}</CardTitle>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={250}>

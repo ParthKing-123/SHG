@@ -1371,7 +1371,7 @@ const markEmiPaid = async (
     const allPaid = dueDates.every((d: any) => d.paid);
 
     await updateDoc(loanRef, {
-      dueDates: JSON.parse(JSON.stringify(dueDates)), // ✅ FORCE DEEP WRITE
+      dueDates: dueDates, // ✅ FIX: Preserving Timestamps
       paidAmount: newPaidAmount,
       remainingAmount: Math.max(newRemaining, 0),
       status: allPaid ? "COMPLETED" : "APPROVED",

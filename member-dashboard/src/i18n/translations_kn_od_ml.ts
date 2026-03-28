@@ -1,0 +1,62 @@
+export const kn = {
+  sidebar: {
+    admin_dashboard: "ನಿರ್ವಾಹಕರ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", shg_members: "ಎಸ್‌ಎಚ್‌ಜಿ ಸದಸ್ಯರು", loans_approvals: "ಸಾಲಗಳು ಮತ್ತು ಅನುಮೋದನೆಗಳು", reports: "ವರದಿಗಳು ಮತ್ತು ವಿಶ್ಲೇಷಣೆ", transactions: "ವಹಿವಾಟುಗಳು", settings: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", monthly_round: "ಮಾಸಿಕ ಸುತ್ತು", log_activity: "ಚಟುವಟಿಕೆಯನ್ನು ಲಾಗ್ ಮಾಡಿ", logout: "ಲಾಗ್ ಔಟ್",
+  },
+  common: {
+    loading: "ಲೋಡ್ ಆಗುತ್ತಿದೆ...", save: "ಉಳಿಸಿ", cancel: "ರದ್ದುಮಾಡಿ", submit: "ಸಲ್ಲಿಸಿ", verify: "ಪರಿಶೀಲಿಸಿ", approve: "ಅನುಮೋದಿಸಿ", reject: "ತಿರಸ್ಕರಿಸಿ", amount: "ಮೊತ್ತ", status: "ಸ್ಥಿತಿ", date: "ದಿನಾಂಕ", member: "ಸದಸ್ಯ", mode: "ಮೋಡ್", description: "ವಿವರಣೆ", action: "ಕ್ರಿಯೆ", yes: "ಹೌದು", no: "ಇಲ್ಲ", edit: "ತಿದ್ದು", delete: "ಅಳಿಸಿ", view: "ವೀಕ್ಷಿಸಿ", close: "ಮುಚ್ಚಿ", search: "ಹುಡುಕಿ", all: "ಎಲ್ಲಾ", total: "ಒಟ್ಟು",
+  },
+  dashboard: {
+    title: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", subtitle: "ಕಾರ್ಯಕ್ಷಮತೆ ಮೆಟ್ರಿಕ್‌ಗಳು", total_members: "ಒಟ್ಟು ಸದಸ್ಯರು", this_month: "ಈ ತಿಂಗಳು +5", total_savings: "ಒಟ್ಟು ಉಳಿತಾಯ", vs_last_month: "ಕಳೆದ ತಿಂಗಳಿಗಿಂತ +12%", active_loans: "ಸಕ್ರಿಯ ಸಾಲಗಳು", repayments: "-8% ಮರುಪಾವತಿ", avg_trust_score: "ಸರಾಸರಿ ಟ್ರಸ್ಟ್ ಸ್ಕೋರ್", points_diff: "+2.3 ಅಂಕಗಳು", monthly_financial_activity: "ಮಾಸಿಕ ಆರ್ಥಿಕ ಚಟುವಟಿಕೆ", desc_monthly_activity: "ಉಳಿತಾಯ, ಸಾಲ ವಿತರಣೆ ಮತ್ತು ಮರುಪಾವತಿ", savings: "ಉಳಿತಾಯ", loans_disbursed: "ಸಾಲ ವಿತರಿಸಲಾಗಿದೆ", repayments_chart: "ಮರುಪಾವತಿ", trust_score_distribution: "ಟ್ರಸ್ಟ್ ಸ್ಕೋರ್ ವಿತರಣೆ", desc_trust_distribution: "ಸ್ಕೋರ್ ಶ್ರೇಣಿಯಿಂದ ಸದಸ್ಯರ ವಿತರಣೆ", members_count: "ಸದಸ್ಯರು", loan_repayment_status: "ಸಾಲ ಮರುಪಾವತಿ ಸ್ಥಿತಿ", desc_loan_repayment: "ಸಮಯಕ್ಕೆ ಸರಿಯಾಗಿ vs ತಡವಾಗಿ vs ಡಿಫಾಲ್ಟ್ (%)", on_time: "ಸಮಯಕ್ಕೆ ಸರಿಯಾಗಿ", late: "ತಡವಾಗಿ", defaulted: "ಡಿಫಾಲ್ಟ್", meeting_attendance_trend: "ಸಭೆಯ ಹಾಜರಾತಿ ಪ್ರವೃತ್ತಿ", desc_meeting_attendance: "ತಿಂಗಳಿಗೆ ಸರಾಸರಿ ಹಾಜರಾತಿ ಶೇಕಡಾವಾರು", attendance_rate: "ಹಾಜರಾತಿ ದರ", quick_stats: "ತ್ವರಿತ ಅಂಕಿಅಂಶಗಳು", this_month_stats: "ಈ ತಿಂಗಳು", transactions_count: "ವಹಿವಾಟುಗಳು", percent_vs_last_month: "ಕಳೆದ ತಿಂಗಳಿಗಿಂತ +18%", repayment_rate: "ಮರುಪಾವತಿ ದರ", excellent: "ಅತ್ಯುತ್ತಮ", group_health_score: "ಗುಂಪಿನ ಆರೋಗ್ಯ ಸ್ಕೋರ್", top_performing: "ಉನ್ನತ ಕಾರ್ಯಕ್ಷಮತೆ",
+  },
+  transactions: {
+    title: "ವಹಿವಾಟುಗಳು", no_transactions: "ಇನ್ನೂ ಯಾವುದೇ ವಹಿವಾಟುಗಳಿಲ್ಲ", view_loan: "ಸಾಲವನ್ನು ವೀಕ್ಷಿಸಿ", verify_cash: "ನಗದನ್ನು ಪರಿಶೀಲಿಸಿ", verified: "ಪರಿಶೀಲಿಸಲಾಗಿದೆ", pending: "ಬಾಕಿ ಇದೆ", online: "ಆನ್‌ಲೈನ್", cash: "ನಗದು", loan_details: "ಸಾಲದ ವಿವರಗಳು", disbursed: "ವಿತರಿಸಲಾಗಿದೆ", loan_amount: "ಸಾಲದ ಮೊತ್ತ", remaining: "ಬಾಕಿ", repayment_progress: "ಮರುಪಾವತಿ ಪ್ರಗತಿ", emis_paid: "ಇಎಂಐ ಪಾವತಿಸಲಾಗಿದೆ", monthly_emi: "ಮಾಸಿಕ ಇಎಂಐ", next_due: "ಮುಂದಿನ ಗಡುವು", all_paid: "ಎಲ್ಲವನ್ನೂ ಪಾವತಿಸಲಾಗಿದೆ", interest_rate: "ಬಡ್ಡಿ ದರ", tenure: "ಅವಧಿ", months: "ತಿಂಗಳುಗಳು", total_payable: "ಒಟ್ಟು ಪಾವತಿಸಬೇಕಾದ", amount_paid: "ಪಾವತಿಸಿದ ಮೊತ್ತ", description: "ವಿವರಣೆ", loan_not_found: "ಸಾಲ ಕಂಡುಬಂದಿಲ್ಲ",
+  },
+  log_activity: {
+    title: "ಚಟುವಟಿಕೆ ಲಾಗಿಂಗ್", subtitle: "ಆರ್ಥಿಕ ವಹಿವಾಟುಗಳು ಮತ್ತು ಸಭೆಯ ಹಾಜರಾತಿಯನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡಿ", fin_entry_title: "ಆರ್ಥಿಕ ವ್ಯವಹಾರ ಪ್ರವೇಶ", fin_entry_desc: "ಉಳಿತಾಯ, ಸಾಲ ವಿತರಣೆ ಅಥವಾ ಮರುಪಾವತಿಯನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡಿ", member_name: "ಸದಸ್ಯರ ಹೆಸರು", select_member: "ಸದಸ್ಯರನ್ನು ಆಯ್ಕೆಮಾಡಿ", amount_rupees: "ಮೊತ್ತ (₹)", transaction_type: "ವಹಿವಾಟಿನ ಪ್ರಕಾರ", select_type: "ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ", savings: "ಉಳಿತಾಯ", loan_repayment: "ಸಾಲ ಮರುಪಾವತಿ", loan_disbursed: "ಸಾಲ ವಿತರಣೆ", record_fin_transaction: "ವಹಿವಾಟು ದಾಖಲಿಸಿ", meeting_attendance: "ಸಭೆಯ ಹಾಜರಾತಿ", meeting_attendance_desc: "ಗುಂಪು ಸಭೆಗಳಿಗೆ ಸದಸ್ಯರ ಹಾಜರಾತಿಯನ್ನು ಲಾಗ್ ಮಾಡಿ", meeting_date: "ಸಭೆಯ ದಿನಾಂಕ", meeting_topic: "ಸಭೆಯ ವಿಷಯ", topic_placeholder: "ಉದಾ., ಮಾಸಿಕ ವಿಮರ್ಶೆ", present: "ಹಾಜರಿದ್ದಾರೆ", absent: "ಗೈರು", finalize_attendance: "ಹಾಜರಾತಿಯನ್ನು ಅಂತಿಮಗೊಳಿಸಿ", recent_activity: "ಇತ್ತೀಚಿನ ಚಟುವಟಿಕೆ", recent_activity_desc: "ಕೊನೆಯ 5 ದಾಖಲಾದ ವಹಿವಾಟುಗಳು", no_recent: "ಯಾವುದೇ ಇತ್ತೀಚಿನ ಪಾವತಿಗಳಿಲ್ಲ", monthly_round_payment: "ಮಾಸಿಕ ರೌಂಡ್ ಪಾವತಿ", paid: "ಪಾವತಿಸಲಾಗಿದೆ",
+  },
+  loan_approvals: {
+    title: "ಸಾಲ ಅನುಮೋದನೆಗಳು", no_pending: "ಯಾವುದೇ ಬಾಕಿ ಸಾಲದ ವಿನಂತಿಗಳಿಲ್ಲ.", member_id: "ಸದಸ್ಯ ಐಡಿ", amount: "ಮೊತ್ತ", tenure: "ಅವಧಿ", emi: "ಇಎಂಐ", purpose: "ಉದ್ದೇಶ", approved: "ಅನುಮೋದಿಸಲಾಗಿದೆ", rejected: "ತಿರಸ್ಕರಿಸಲಾಗಿದೆ", approve_btn: "ಅನುಮೋದಿಸಿ", reject_btn: "ತಿರಸ್ಕರಿಸಿ",
+  }
+};
+
+export const od = {
+  sidebar: {
+    admin_dashboard: "ଆଡମିନ୍ ଡ୍ୟାସବୋର୍ଡ", dashboard: "ଡ୍ୟାସବୋର୍ଡ", shg_members: "SHG ସଦସ୍ୟ", loans_approvals: "ଋଣ ଏବଂ ଅନୁମୋଦନ", reports: "ରିପୋର୍ଟ ଏବଂ ଆନାଲିଟିକ୍ସ", transactions: "କାରବାର", settings: "ସେଟିଂସମୂହ", monthly_round: "ମାସିକ ରାଉଣ୍ଡ", log_activity: "କାର୍ଯ୍ୟକଳାପ ଲଗ୍ କରନ୍ତୁ", logout: "ଲଗ୍ ଆଉଟ୍",
+  },
+  common: {
+    loading: "ଲୋଡ୍ ହେଉଛି...", save: "ସେଭ୍ କରନ୍ତୁ", cancel: "ବାତିଲ୍ କରନ୍ତୁ", submit: "ଦାଖଲ କରନ୍ତୁ", verify: "ଯାଞ୍ଚ କରନ୍ତୁ", approve: "ଅନୁମୋଦନ କରନ୍ତୁ", reject: "ପ୍ରତ୍ୟାଖ୍ୟାନ କରନ୍ତୁ", amount: "ପରିମାଣ", status: "ସ୍ଥିତି", date: "ତାରିଖ", member: "ସଦସ୍ୟ", mode: "ମୋଡ୍", description: "ବିବରଣୀ", action: "କାର୍ଯ୍ୟ", yes: "ହଁ", no: "ନା", edit: "ସମ୍ପାଦନ କରନ୍ତୁ", delete: "ମୁଛନ୍ତୁ", view: "ଦେଖନ୍ତୁ", close: "ବନ୍ଦ କରନ୍ତୁ", search: "ଖୋଜନ୍ତୁ", all: "ସମସ୍ତ", total: "ମୋଟ",
+  },
+  dashboard: {
+    title: "ଡ୍ୟାସବୋର୍ଡ", subtitle: "SHG ପ୍ରଦର୍ଶନ ମେଟ୍ରିକ୍ସ", total_members: "ମୋଟ ସଦସ୍ୟ", this_month: "ଏହି ମାସ +5", total_savings: "ମୋଟ ସଞ୍ଚୟ", vs_last_month: "ଗତ ମାସ ତୁଳନାରେ +12%", active_loans: "ସକ୍ରିୟ ଋଣ", repayments: "-8% ପରିଶୋଧ", avg_trust_score: "ହାରାହାରି ଟ୍ରଷ୍ଟ ସ୍କୋର", points_diff: "+2.3 ପଏଣ୍ଟ", monthly_financial_activity: "ମାସିକ ଆର୍ଥିକ କାର୍ଯ୍ୟକଳାପ", desc_monthly_activity: "ସଞ୍ଚୟ, ଋଣ ବିତରଣ, ଏବଂ ପରିଶୋଧ", savings: "ସଞ୍ଚୟ", loans_disbursed: "ବିତରଣ କରାଯାଇଥିବା ଋଣ", repayments_chart: "ପରିଶୋଧ", trust_score_distribution: "ଟ୍ରଷ୍ଟ ସ୍କୋର ବିତରଣ", desc_trust_distribution: "ସ୍କୋର ପରିସର ଅନୁଯାୟୀ ସଦସ୍ୟ ବିତରଣ", members_count: "ସଦସ୍ୟ", loan_repayment_status: "ଋଣ ପରିଶୋଧ ସ୍ଥିତି", desc_loan_repayment: "ଠିକ୍ ସମୟରେ ବନାମ ବିଳମ୍ବ ବନାମ ଡିଫଲ୍ଟ (%)", on_time: "ଠିକ୍ ସମୟରେ", late: "ବିଳମ୍ବ", defaulted: "ଡିଫଲ୍ଟ", meeting_attendance_trend: "ବୈଠକ ଉପସ୍ଥାନ ଧାରା", desc_meeting_attendance: "ମାସକୁ ହାରାହାରି ଉପସ୍ଥାନ ପ୍ରତିଶତ", attendance_rate: "ଉପସ୍ଥାନ ହାର", quick_stats: "ଦ୍ରୁତ ପରିସଂଖ୍ୟାନ", this_month_stats: "ଏହି ମାସ", transactions_count: "କାରବାର", percent_vs_last_month: "+18% ଗତ ମାସ ତୁଳନାରେ", repayment_rate: "ପରିଶୋଧ ହାର", excellent: "ଚମତ୍କାର", group_health_score: "ଗ୍ରୁପ୍ ସ୍ୱାସ୍ଥ୍ୟ ସ୍କୋର", top_performing: "ଶ୍ରେଷ୍ଠ ପ୍ରଦର୍ଶନ",
+  },
+  transactions: {
+    title: "କାରବାର", no_transactions: "ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି କାରବାର ନାହିଁ", view_loan: "ଋଣ ଦେଖନ୍ତୁ", verify_cash: "ନଗଦ ଯାଞ୍ଚ କରନ୍ତୁ", verified: "ଯାଞ୍ଚ ହୋଇଛି", pending: "ବିଚାରାଧୀନ ଅଛି", online: "ଅନଲାଇନ୍", cash: "ନଗଦ", loan_details: "ଋଣ ବିବରଣୀ", disbursed: "ବିତରଣ କରାଯାଇଛି", loan_amount: "ଋଣ ପରିମାଣ", remaining: "ବାକି ଅଛି", repayment_progress: "ପରିଶୋଧ ପ୍ରଗତି", emis_paid: "ଇଏମଆଇ ପରିଶୋଧିତ", monthly_emi: "ମାସିକ ଇଏମଆଇ", next_due: "ଆଗାମୀ ଦେୟ", all_paid: "ସମସ୍ତ ପରିଶୋଧିତ", interest_rate: "ସୁଧ ହାର", tenure: "କାର୍ଯ୍ୟକାଳ", months: "ମାସ", total_payable: "ମୋଟ ଦେୟ", amount_paid: "ପ୍ରଦାନ କରାଯାଇଥିବା ପରିମାଣ", description: "ବିବରଣୀ", loan_not_found: "ଋଣ ମିଳିଲା ନାହିଁ",
+  },
+  log_activity: {
+    title: "କାର୍ଯ୍ୟକଳାପ ଲଗିଂ", subtitle: "ଯୋଗଦାନ ଏବଂ ବୈଠକ ଉପସ୍ଥାନ ରେକର୍ଡ କରନ୍ତୁ", fin_entry_title: "ଆର୍ଥିକ କାରବାର ଏଣ୍ଟ୍ରି", fin_entry_desc: "ସଞ୍ଚୟ, ଋଣ ବିତରଣ କିମ୍ବା ପରିଶୋଧ ରେକର୍ଡ କରନ୍ତୁ", member_name: "ସଦସ୍ୟ ନାମ", select_member: "ସଦସ୍ୟ ବାଛନ୍ତୁ", amount_rupees: "ପରିମାଣ (₹)", transaction_type: "କାରବାର ପ୍ରକାର", select_type: "ପ୍ରକାର ବାଛନ୍ତୁ", savings: "ସଞ୍ଚୟ", loan_repayment: "ଋଣ ପରିଶୋଧ", loan_disbursed: "ଋଣ ବିତରଣ", record_fin_transaction: "କାରବାର ରେକର୍ଡ କରନ୍ତୁ", meeting_attendance: "ବୈଠକ ଉପସ୍ଥାନ", meeting_attendance_desc: "ଗ୍ରୁପ୍ ବୈଠକ ପାଇଁ ସଦସ୍ୟ ଉପସ୍ଥାନ ଲଗ୍ କରନ୍ତୁ", meeting_date: "ବୈଠକ ତାରିଖ", meeting_topic: "ବୈଠକ ବିଷୟ", topic_placeholder: "ଉଦାହରଣ, ମାସିକ ସମୀକ୍ଷା", present: "ଉପସ୍ଥିତ", absent: "ଅନୁପସ୍ଥିତ", finalize_attendance: "ଉପସ୍ଥାନ ଶେଷ କରନ୍ତୁ", recent_activity: "ସାମ୍ପ୍ରତିକ କାର୍ଯ୍ୟକଳାପ", recent_activity_desc: "ଶେଷ 5 ଟି ରେକର୍ଡ କରାଯାଇଥିବା କାରବାର", no_recent: "କୌଣସି ସାମ୍ପ୍ରତିକ ପେମେଣ୍ଟ୍ ନାହିଁ", monthly_round_payment: "ମାସିକ ରାଉଣ୍ଡ ପେମେଣ୍ଟ୍", paid: "ପ୍ରଦାନ କରାଯାଇଛି",
+  },
+  loan_approvals: {
+    title: "ଋଣ ଅନୁମୋଦନ", no_pending: "କୌଣସି ପେଣ୍ଡିଂ ଋଣ ଅନୁରୋଧ ନାହିଁ।", member_id: "ସଦସ୍ୟ ଆଇଡି", amount: "ପରିମାଣ", tenure: "କାର୍ଯ୍ୟକାଳ", emi: "ଇଏମଆଇ", purpose: "ଉଦ୍ଦେଶ୍ୟ", approved: "ଅନୁମୋଦିତ ହୋଇଛି", rejected: "ପ୍ରତ୍ୟାଖ୍ୟାନ ହୋଇଛି", approve_btn: "ଅନୁମୋଦନ କରନ୍ତୁ", reject_btn: "ପ୍ରତ୍ୟାଖ୍ୟାନ କରନ୍ତୁ",
+  }
+};
+
+export const ml = {
+  sidebar: {
+    admin_dashboard: "അഡ്മിൻ ഡാഷ്‌ബോർഡ്", dashboard: "ഡാഷ്‌ബോർഡ്", shg_members: "SHG അംഗങ്ങൾ", loans_approvals: "ലോണുകളും അംഗീകാരങ്ങളും", reports: "റിപ്പോർട്ടുകളും അനലിറ്റിക്സും", transactions: "ഇടപാടുകൾ", settings: "ക്രമീകരണങ്ങൾ", monthly_round: "പ്രതിമാസ റൗണ്ട്", log_activity: "പ്രവർത്തനം രേഖപ്പെടുത്തുക", logout: "ലോഗ്ഔട്ട്",
+  },
+  common: {
+    loading: "ലോഡുചെയ്യുന്നു...", save: "സേവ് ചെയ്യുക", cancel: "റദ്ദാക്കുക", submit: "സമർപ്പിക്കുക", verify: "പരിശോധിക്കുക", approve: "അംഗീകരിക്കുക", reject: "നിരസിക്കുക", amount: "തുക", status: "സ്റ്റാറ്റസ്", date: "തീയതി", member: "അംഗം", mode: "മോഡ്", description: "വിവരണം", action: "പ്രവർത്തനം", yes: "അതെ", no: "ഇല്ല", edit: "എഡിറ്റ് ചെയ്യുക", delete: "ഇല്ലാതാക്കുക", view: "കാണുക", close: "അടയ്ക്കുക", search: "തിരയുക", all: "എല്ലാം", total: "ആകെ",
+  },
+  dashboard: {
+    title: "ഡാഷ്‌ബോർഡ്", subtitle: "SHG പ്രകടന മെട്രിക്സ്", total_members: "ആകെ അംഗങ്ങൾ", this_month: "ഈ മാസം +5", total_savings: "ആകെ സമ്പാദ്യം", vs_last_month: "കഴിഞ്ഞ മാസത്തേക്കാൾ +12%", active_loans: "സജീവ വായ്പകൾ", repayments: "-8% തിരിച്ചടവുകൾ", avg_trust_score: "ശരാശരി ട്രസ്റ്റ് സ്കോർ", points_diff: "+2.3 പോയിൻ്റുകൾ", monthly_financial_activity: "പ്രതിമാസ സാമ്പത്തിക പ്രവർത്തനം", desc_monthly_activity: "സമ്പാദ്യം, വായ്പ വിതരണം, തിരിച്ചടവുകൾ", savings: "സമ്പാദ്യം", loans_disbursed: "വായ്പ വിതരണം", repayments_chart: "തിരിച്ചടവുകൾ", trust_score_distribution: "ട്രസ്റ്റ് സ്കോർ വിതരണം", desc_trust_distribution: "സ്കോർ പരിധി അനുസരിച്ച് അംഗങ്ങൾ", members_count: "അംഗങ്ങൾ", loan_repayment_status: "വായ്പ തിരിച്ചടവ് നില", desc_loan_repayment: "കൃത്യസമയം vs വൈകിയത് vs ഡിഫോൾട്ട് (%)", on_time: "കൃത്യസമയം", late: "വൈകിയത്", defaulted: "ഡിഫോൾട്ട്", meeting_attendance_trend: "മീറ്റിംഗ് ഹാജർ ട്രെൻഡ്", desc_meeting_attendance: "പ്രതിമാസ ശരാശരി ഹാജർ ലക്ഷ്യം (%)", attendance_rate: "ഹാജർ നിരക്ക്", quick_stats: "ദ്രുത സ്ഥിതിവിവരക്കണക്കുകൾ", this_month_stats: "ഈ മാസം", transactions_count: "ഇടപാടുകൾ", percent_vs_last_month: "കഴിഞ്ഞ മാസത്തേക്കാൾ +18%", repayment_rate: "തിരിച്ചടവ് നിരക്ക്", excellent: "മികച്ചത്", group_health_score: "ഗ്രൂപ്പ് ആരോഗ്യ സ്കോർ", top_performing: "മികച്ച പ്രകടനം",
+  },
+  transactions: {
+    title: "ഇടപാടുകൾ", no_transactions: "ഇതുവരെ ഇടപാടുകളൊന്നുമില്ല", view_loan: "ലോൺ കാണുക", verify_cash: "പണം പരിശോധിക്കുക", verified: "പരിശോധിച്ചു", pending: "തീരുമാനമാകാത്ത", online: "ഓൺലൈൻ", cash: "പണം", loan_details: "ലോൺ വിവരങ്ങൾ", disbursed: "വിതരണം ചെയ്തു", loan_amount: "ലോൺ തുക", remaining: "ബാക്കിയുള്ള", repayment_progress: "തിരിച്ചടവ് പുരോഗതി", emis_paid: "ഇഎംഐകൾ അടച്ചു", monthly_emi: "പ്രതിമാസ ഇഎംഐ", next_due: "അടുത്ത തീയതി", all_paid: "എല്ലാം അടച്ചു", interest_rate: "പലിശ നിരക്ക്", tenure: "കാലാവധി", months: "മാസങ്ങൾ", total_payable: "ആകെ അടയ്ക്കേണ്ടത്", amount_paid: "അടച്ച തുക", description: "വിവരണം", loan_not_found: "ലോൺ കണ്ടെത്തിയില്ല",
+  },
+  log_activity: {
+    title: "ആക്റ്റിവിറ്റി ലോഗിംഗ്", subtitle: "സാമ്പത്തിക ഇടപാടുകളും മീറ്റിംഗ് ഹാജരും രേഖപ്പെടുത്തുക", fin_entry_title: "സാമ്പത്തിക ഇടപാട് രേഖപ്പെടുത്തൽ", fin_entry_desc: "സമ്പാദ്യം, ലോൺ വിതരണം അല്ലെങ്കിൽ തിരിച്ചടവുകൾ രേഖപ്പെടുത്തുക", member_name: "അംഗത്തിന്റെ പേര്", select_member: "അംഗത്തെ തിരഞ്ഞെടുക്കുക", amount_rupees: "തുക (₹)", transaction_type: "ഇടപാട് തരം", select_type: "തരം തിരഞ്ഞെടുക്കുക", savings: "സമ്പാദ്യം", loan_repayment: "ലോൺ തിരിച്ചടവ്", loan_disbursed: "ലോൺ വിതരണം", record_fin_transaction: "സാമ്പത്തിക ഇടപാട് രേഖപ്പെടുത്തുക", meeting_attendance: "മീറ്റിംഗ് ഹാജർ", meeting_attendance_desc: "ഗ്രൂപ്പ് മീറ്റിംഗുകൾക്കായുള്ള അംഗങ്ങളുടെ ഹാജർ ലോഗ് ചെയ്യുക", meeting_date: "മീറ്റിംഗ് തീയതി", meeting_topic: "മീറ്റിംഗ് വിഷയം", topic_placeholder: "ഉദാഹരണത്തിന്, പ്രതിമാസ അവലോകനം", present: "ഹാജർ", absent: "ഗൈർഹാജർ", finalize_attendance: "ഹാജർ അന്തിമമാക്കുക", recent_activity: "സമീപകാല പ്രവർത്തനം", recent_activity_desc: "രേഖപ്പെടുത്തിയ അവസാന 5 ഇടപാടുകൾ", no_recent: "സമീപകാല പേയ്‌മെൻ്റുകളൊന്നുമില്ല", monthly_round_payment: "പ്രതിമാസ റൗണ്ട് പേയ്‌മെന്റ്", paid: "പണമടച്ചു",
+  },
+  loan_approvals: {
+    title: "ലോൺ അംഗീകാരങ്ങൾ", no_pending: "തീർപ്പുകൽപ്പിക്കാത്ത ലോൺ അഭ്യർത്ഥനകളൊന്നുമില്ല.", member_id: "അംഗ ഐഡി", amount: "തുക", tenure: "കാലാവധി", emi: "ഇഎംഐ", purpose: "ഉദ്ദേശ്യം", approved: "അംഗീകരിച്ചു", rejected: "നിരസിച്ചു", approve_btn: "അംഗീകരിക്കുക", reject_btn: "നിരസിക്കുക",
+  }
+};

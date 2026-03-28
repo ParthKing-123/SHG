@@ -1,5 +1,7 @@
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   query,
   where,
@@ -32,49 +34,56 @@ export async function fetchMemberTransactions(
   );
 
   for (const round of roundsSnap.docs) {
-    const contribSnap = await getDocs(
-      query(
-        collection(
-          db,
-          "ShgGroups",
-          shgId,
-          "monthlyRounds",
-          round.id,
-          "contributions"
-        ),
-        where("memberId", "==", memberId)
-      )
-    );
+    const contribRef = doc(db, "ShgGroups", shgId, "monthlyRounds", round.id, "contributions", memberId);
+    const docSnap = await getDoc(contribRef);
 
-    contribSnap.forEach((doc) => {
-      const d = doc.data();
+    if (docSnap.exists()) {
+      const d = docSnap.data();
+      if (!d.paidAt) continue;
+
+      const dateObj = typeof d.paidAt.toDate === "function" 
+        ? d.paidAt.toDate() 
+        : new Date(d.paidAt.seconds ? d.paidAt.seconds * 1000 : d.paidAt);
+
       transactions.push({
-        date: d.paidAt.toDate().toLocaleString("en-IN"),
+        date: dateObj.toLocaleString("en-IN"),
         type: "Monthly Contribution",
         category: "Savings",
-        amount: d.amountPaid,
+        amount: d.amountPaid || 0,
         status: "Verified",
       });
-    });
+    }
   }
 
   /* =========================
      LOAN EMI PAYMENTS
   ========================== */
   const loansSnap = await getDocs(
-    collection(db, "ShgGroups", shgId, "loans")
+    query(
+      collection(db, "ShgGroups", shgId, "loans"),
+      where("memberId", "==", memberId)
+    )
   );
 
   loansSnap.forEach((loanDoc) => {
     const loan = loanDoc.data();
 
     loan.dueDates?.forEach((due: any) => {
-      if (due.paid === true) {
+      if (due.paid === true && due.paidAt) {
+        let dateObj;
+        if (typeof due.paidAt.toDate === "function") {
+          dateObj = due.paidAt.toDate();
+        } else if (due.paidAt.seconds) {
+          dateObj = new Date(due.paidAt.seconds * 1000);
+        } else {
+          dateObj = new Date(due.paidAt);
+        }
+
         transactions.push({
-          date: due.date.toDate().toLocaleString("en-IN"),
+          date: dateObj.toLocaleString("en-IN"),
           type: "Loan EMI Payment",
           category: "Loan",
-          amount: loan.emiAmount,
+          amount: loan.emiAmount || loan.emi || 0,
           status: "Verified",
         });
       }

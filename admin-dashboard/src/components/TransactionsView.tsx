@@ -155,7 +155,6 @@ import {
 import { db } from "./firebase";
 import { useAuth } from "../AuthContext";
 import CashVerificationPanel from "./CashVerificationPanel";
-//import { useLanguage } from "../i18n/LanguageContext";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
@@ -196,7 +195,7 @@ export default function TransactionsView() {
               if (memberSnap.exists()) {
                 memberName = memberSnap.data().name;
               }
-            } catch {}
+            } catch { }
           }
 
           return {
@@ -255,12 +254,12 @@ export default function TransactionsView() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-semibold">{("transactions.title")}</h2>
+      <h2 className="text-2xl font-semibold">Transactions</h2>
 
       {transactions.length === 0 ? (
         <div className="text-center py-12 text-gray-500">
           <FileText className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-          <p>{("transactions.no_transactions")}</p>
+          <p>No transactions yet</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -327,7 +326,7 @@ export default function TransactionsView() {
                   onClick={() => handleViewLoan(tx.loanId)}
                 >
                   <Eye className="w-4 h-4" />
-                  {("transactions.view_loan")}
+                  View Loan
                 </Button>
               </div>
 
@@ -372,7 +371,7 @@ export default function TransactionsView() {
                         const allPaid = dueDates.every((d: any) => d.paid);
 
                         await updateDoc(loanRef, {
-                          dueDates: JSON.parse(JSON.stringify(dueDates)),
+                          dueDates: dueDates,
                           paidAmount: newPaidAmount,
                           remainingAmount: Math.max(newRemaining, 0),
                           status: allPaid ? "COMPLETED" : "APPROVED",
@@ -393,11 +392,11 @@ export default function TransactionsView() {
       <Dialog open={isLoanDialogOpen} onOpenChange={setIsLoanDialogOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>{("transactions.loan_details")}</DialogTitle>
+            <DialogTitle>Loan Details</DialogTitle>
           </DialogHeader>
 
           {loadingLoan ? (
-            <div className="py-8 text-center text-gray-500">{("common.loading")}</div>
+            <div className="py-8 text-center text-gray-500">Loading...</div>
           ) : selectedLoan ? (
             <div className="space-y-5">
               {/* Header */}
@@ -407,7 +406,7 @@ export default function TransactionsView() {
                     {selectedLoan.purpose || "Loan"}
                   </h3>
                   <p className="text-sm text-gray-500">
-                    {("transactions.disbursed")}:{" "}
+                    Disbursed:{" "}
                     {selectedLoan.startDate?.toDate?.()
                       ? selectedLoan.startDate.toDate().toLocaleDateString("en-IN")
                       : "N/A"}
@@ -431,13 +430,13 @@ export default function TransactionsView() {
               {/* Amounts */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="text-xs text-gray-500">{("transactions.loan_amount")}</p>
+                  <p className="text-xs text-gray-500">Loan Amount</p>
                   <p className="text-xl font-semibold text-gray-900">
                     ₹{(selectedLoan.principalAmount || 0).toLocaleString("en-IN")}
                   </p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="text-xs text-gray-500">{("transactions.remaining")}</p>
+                  <p className="text-xs text-gray-500">Remaining</p>
                   <p className="text-xl font-semibold text-orange-600">
                     ₹{(selectedLoan.remainingAmount || 0).toLocaleString("en-IN")}
                   </p>
@@ -447,7 +446,7 @@ export default function TransactionsView() {
               {/* Repayment Progress */}
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">{("transactions.repayment_progress")}</span>
+                  <span className="text-gray-600">Repayment Progress</span>
                   <span className="font-medium text-gray-900">
                     {getLoanProgress(selectedLoan).toFixed(1)}%
                   </span>
@@ -458,7 +457,7 @@ export default function TransactionsView() {
                 />
                 <p className="text-xs text-gray-500">
                   {selectedLoan.dueDates?.filter((d: any) => d.paid).length || 0} of{" "}
-                  {selectedLoan.dueDates?.length || 0} {("transactions.emis_paid")}
+                  {selectedLoan.dueDates?.length || 0} EMIs paid
                 </p>
               </div>
 
@@ -466,7 +465,7 @@ export default function TransactionsView() {
               <Card className="bg-blue-50 border-blue-100">
                 <CardContent className="p-4 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">{("transactions.monthly_emi")}</span>
+                    <span className="text-sm text-gray-600">Monthly EMI</span>
                     <span className="text-lg font-semibold text-gray-900">
                       ₹{(selectedLoan.emiAmount || 0).toLocaleString("en-IN")}
                     </span>
@@ -474,28 +473,28 @@ export default function TransactionsView() {
                   <div className="flex items-center gap-2 text-sm">
                     <Clock className="w-4 h-4 text-orange-600" />
                     <span className="text-gray-600">
-                      {("transactions.next_due")}:{" "}
+                      Next Due:{" "}
                       <span className="text-orange-600 font-medium">
                         {getNextDueDate(selectedLoan)}
                       </span>
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm pt-2 border-t border-blue-100">
-                    <span className="text-gray-600">{("transactions.interest_rate")}</span>
+                    <span className="text-gray-600">Interest Rate</span>
                     <span className="font-medium">{selectedLoan.interestRate || 12}% p.a.</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">{("transactions.tenure")}</span>
-                    <span className="font-medium">{selectedLoan.tenureMonths || 0} {("transactions.months")}</span>
+                    <span className="text-gray-600">Tenure</span>
+                    <span className="font-medium">{selectedLoan.tenureMonths || 0} months</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">{("transactions.total_payable")}</span>
+                    <span className="text-gray-600">Total Payable</span>
                     <span className="font-medium">
                       ₹{(selectedLoan.totalPayable || 0).toLocaleString("en-IN")}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-600">{("transactions.amount_paid")}</span>
+                    <span className="text-gray-600">Amount Paid</span>
                     <span className="font-medium text-green-600">
                       ₹{(selectedLoan.paidAmount || 0).toLocaleString("en-IN")}
                     </span>
@@ -506,7 +505,7 @@ export default function TransactionsView() {
               {/* Description */}
               {selectedLoan.description && (
                 <div>
-                  <p className="text-sm font-medium text-gray-700 mb-1">{("transactions.description")}</p>
+                  <p className="text-sm font-medium text-gray-700 mb-1">Description</p>
                   <p className="text-sm text-gray-500 bg-gray-50 p-3 rounded-lg">
                     {selectedLoan.description}
                   </p>
@@ -515,7 +514,7 @@ export default function TransactionsView() {
             </div>
           ) : (
             <div className="py-8 text-center text-gray-500">
-              {("transactions.loan_not_found")}
+              Loan not found
             </div>
           )}
         </DialogContent>

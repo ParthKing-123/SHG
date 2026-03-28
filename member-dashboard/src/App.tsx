@@ -23,6 +23,7 @@ import { Wallet } from "lucide-react";
 import { MonthlyRound } from "./components/pages/MonthlyRound";
 import { VerifyPhone } from "./components/pages/VerifyPhone";
 import { Chatbot } from "./components/ChatBot";
+import { useLanguage } from "./LanguageContext";
 
 type Page = 
   | "dashboard" 
@@ -48,6 +49,8 @@ export default function App() {
   const [appView, setAppView] = useState<AppView>("login");
   const [memberData, setMemberData] = useState<any>(null);
   const [loadingMember, setLoadingMember] = useState(true);
+
+  const { t, language, setLanguage } = useLanguage();
 
   const [auth, setAuth] = useState<AuthState>({
     isAuthenticated: false,
@@ -161,6 +164,11 @@ if (!shgId) {
           financial: 38,
           timeliness: 37,
           attendance: 17,
+          history: [
+            { month: "Jan", score: Math.max(0, member.trustScore - 10) },
+            { month: "Feb", score: Math.max(0, member.trustScore - 5) },
+            { month: "Mar", score: member.trustScore },
+          ]
         },
         financials: {
           totalSavings: 45000,
@@ -257,16 +265,16 @@ async function sendWelcomeEmail(email: string, name: string) {
 }
 
   const navigationItems = [
-    { id: "dashboard" as Page, label: "Dashboard", icon: Home },
-    { id: "ledger" as Page, label: "My Ledger", icon: BookOpen },
-    { id: "goals" as Page, label: "Savings Goals", icon: Target },
-    { id: "loans" as Page, label: "Loans", icon: TrendingUp },
-    { id: "monthly-round" as Page, label: "Monthly Round", icon: Wallet },
-    { id: "learning" as Page, label: "Financial Literacy", icon: GraduationCap },
-    { id: "group" as Page, label: "Group Directory", icon: Users },
-    { id: "messages" as Page, label: "Messages", icon: MessageSquare },
-    { id: "achievements" as Page, label: "Achievements", icon: Award },
-    { id: "profile" as Page, label: "Profile", icon: User },
+    { id: "dashboard" as Page, label: t("dashboard", "sidebar"), icon: Home },
+    { id: "ledger" as Page, label: t("ledger", "sidebar"), icon: BookOpen },
+    { id: "goals" as Page, label: t("goals", "sidebar"), icon: Target },
+    { id: "loans" as Page, label: t("loans", "sidebar"), icon: TrendingUp },
+    { id: "monthly-round" as Page, label: t("monthly_round", "sidebar"), icon: Wallet },
+    { id: "learning" as Page, label: t("learning", "sidebar"), icon: GraduationCap },
+    { id: "group" as Page, label: t("group", "sidebar"), icon: Users },
+    { id: "messages" as Page, label: t("messages", "sidebar"), icon: MessageSquare },
+    { id: "achievements" as Page, label: t("achievements", "sidebar"), icon: Award },
+    { id: "profile" as Page, label: t("profile", "sidebar"), icon: User },
   ];
 
   const handleLogin = () => {
@@ -410,14 +418,28 @@ if (appView === "admin-dashboard") {
           </nav>
 
           {sidebarOpen && (
-            <div className="mt-8">
+            <div className="mt-8 space-y-4">
+              <div className="px-2">
+                <p className="text-xs text-gray-500 mb-2">Language / भाषा</p>
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  className="w-full bg-gray-50 border border-gray-200 text-gray-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                >
+                  <option value="en">English</option>
+                  <option value="hi">हिंदी (Hindi)</option>
+                  <option value="bn">বাংলা (Bengali)</option>
+                  <option value="mr">मराठी (Marathi)</option>
+                  <option value="te">తెలుగు (Telugu)</option>
+                </select>
+              </div>
               <Button 
                 variant="outline" 
                 className="w-full gap-2"
                 onClick={handleLogout}
               >
                 <LogOut className="w-4 h-4" />
-                Logout
+                {t("logout", "sidebar") === "logout" ? "Logout" : t("logout", "sidebar")}
               </Button>
             </div>
           )}

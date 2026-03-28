@@ -4,7 +4,7 @@ import { useAuth } from "../AuthContext";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../components/firebase";
-//import { Home, Activity, Users, FileText, Settings, LogOut, Wallet } from "lucide-react";
+import { useLanguage } from "../LanguageContext";
 
 
 interface SidebarProps {
@@ -15,6 +15,7 @@ interface SidebarProps {
 
 export function Sidebar({ activeView, onNavigate, onLogout }: SidebarProps) {
   const { role, shgId } = useAuth();
+  const { t, language, setLanguage } = useLanguage();
 
   const [shgName, setShgName] = useState<string>("");
 
@@ -33,17 +34,15 @@ export function Sidebar({ activeView, onNavigate, onLogout }: SidebarProps) {
   }, [shgId]);
 
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: Home },
-    { id: "log-activity", label: "Log Activity", icon: Activity },
-    { id: "members", label: "Members", icon: Users },
-    { id: "loan-approvals", label: "Loan Approvals", icon: FileText },
-    { id: "reports", label: "Reports", icon: FileText },
-    { id: "monthly-round", label: "Monthly Round", icon: Wallet },
-    { id: "transactions", label: "Transactions", icon: Wallet },
-    { id: "settings", label: "Settings", icon: Settings },
-    {id: "logout", label: "Logout", icon: LogOut},
-    
-
+    { id: "dashboard", label: t("dashboard", "sidebar"), icon: Home },
+    { id: "log-activity", label: t("log_activity", "sidebar"), icon: Activity },
+    { id: "members", label: t("shg_members", "sidebar"), icon: Users },
+    { id: "loan-approvals", label: t("loans_approvals", "sidebar"), icon: FileText },
+    { id: "reports", label: t("reports", "sidebar"), icon: FileText },
+    { id: "monthly-round", label: t("monthly_round", "sidebar"), icon: Wallet },
+    { id: "transactions", label: t("transactions", "sidebar"), icon: Wallet },
+    { id: "settings", label: t("settings", "sidebar"), icon: Settings },
+    { id: "logout", label: t("logout", "sidebar") === "logout" ? "Logout" : t("logout", "sidebar"), icon: LogOut},
   ];
 
   return (
@@ -93,8 +92,22 @@ export function Sidebar({ activeView, onNavigate, onLogout }: SidebarProps) {
         </ul>
       </nav>
 
-      {/* SHG Group Selector */}
+      {/* SHG Group Selector & Language */}
       <div className="absolute bottom-6 left-4 right-4">
+        <div className="bg-white rounded-lg p-4 border border-gray-200 mb-4">
+          <p className="text-xs text-gray-500 mb-2">Language / भाषा</p>
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="w-full bg-gray-50 border border-gray-200 text-gray-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            <option value="en">English</option>
+            <option value="hi">हिंदी (Hindi)</option>
+            <option value="bn">বাংলা (Bengali)</option>
+            <option value="mr">मराठी (Marathi)</option>
+            <option value="te">తెలుగు (Telugu)</option>
+          </select>
+        </div>
         <div className="bg-white rounded-lg p-4 border border-gray-200">
           <p className="text-xs text-gray-600 mb-2">Active SHG Group</p>
           <p className="text-teal-700">{shgName || "Loading..."}</p>

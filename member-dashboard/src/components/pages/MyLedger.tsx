@@ -111,9 +111,12 @@ if (!uid) return null;
 };
 
 const resolveTimestamp = (data: any): number | null => {
-  if (data.timestamp?.toMillis) return data.timestamp.toMillis();
-  if (data.createdAt?.toMillis) return data.createdAt.toMillis();
-  if (data.paidAt?.toMillis) return data.paidAt.toMillis();
+  const ts = data.timestamp || data.createdAt || data.paidAt;
+  if (!ts) return null;
+  if (typeof ts.toMillis === "function") return ts.toMillis();
+  if (typeof ts.toDate === "function") return ts.toDate().getTime();
+  if (ts.seconds) return ts.seconds * 1000;
+  if (typeof ts === "string" || typeof ts === "number") return new Date(ts).getTime();
   return null;
 };
 
@@ -191,12 +194,16 @@ const fetchEmiTransactions = async (): Promise<Transaction[]> => {
 
     loan.dueDates.forEach((d: any, index: number) => {
       if (d.paid && d.paidAt) {
+        const dateObj = typeof d.paidAt.toDate === "function" 
+          ? d.paidAt.toDate() 
+          : new Date(d.paidAt.seconds ? d.paidAt.seconds * 1000 : d.paidAt);
+
         txns.push({
           id: `emi-${loanDoc.id}-${index}`,
-          date: d.paidAt.toDate().toLocaleString("en-IN"),
+          date: dateObj.toLocaleString("en-IN"),
           type: "Loan EMI Payment",
           category: "Loan",
-          amount: loan.emiAmount,
+          amount: loan.emiAmount || loan.emi || 0,
           status: "verified",
         });
       }

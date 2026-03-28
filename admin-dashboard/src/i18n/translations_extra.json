@@ -1,0 +1,717 @@
+{
+  "en": {
+    "ledger": {
+      "total_contributed": "Total Contributed",
+      "total_group_savings": "Total Group Savings",
+      "loan_balance": "Loan Balance",
+      "monthly_activity": "Monthly Activity",
+      "financial_breakdown": "Financial Breakdown",
+      "transaction_history": "Transaction History",
+      "export_statement": "Export Statement",
+      "search": "Search transactions...",
+      "category": "Category",
+      "status": "Status",
+      "date_range": "Date Range",
+      "date": "Date",
+      "type": "Type",
+      "amount": "Amount",
+      "blockchain_repayments": "Blockchain Repayments"
+    },
+    "goals": {
+      "title": "Savings Goals",
+      "create_goal": "Create New Goal",
+      "locked_savings": "Locked Savings",
+      "goal_name": "Goal Name",
+      "target_amount": "Target Amount",
+      "deadline": "Deadline",
+      "progress": "Progress"
+    },
+    "literacy": {
+      "title": "Financial Literacy",
+      "modules": "Learning Modules",
+      "start_course": "Start Course",
+      "completed": "Completed"
+    },
+    "directory": {
+      "title": "Group Directory",
+      "members": "Members",
+      "role": "Role",
+      "joined": "Joined",
+      "contact": "Contact"
+    },
+    "messages": {
+      "title": "Messages",
+      "type_message": "Type your message...",
+      "send": "Send"
+    },
+    "achievements": {
+      "title": "Achievements",
+      "unlocked": "Unlocked",
+      "locked": "Locked",
+      "points": "Points"
+    },
+    "profile": {
+      "title": "Profile",
+      "personal_info": "Personal Info",
+      "edit": "Edit Profile",
+      "save": "Save Changes"
+    },
+    "monthly_round": {
+      "title": "Monthly Round",
+      "contribute": "Contribute",
+      "pay_savings": "Pay Savings",
+      "pay_installments": "Pay Installments",
+      "due_date": "Due Date"
+    }
+  },
+  "hi": {
+    "ledger": {
+      "total_contributed": "कुल योगदान",
+      "total_group_savings": "कुल समूह बचत",
+      "loan_balance": "ऋण शेष",
+      "monthly_activity": "मासिक गतिविधि",
+      "financial_breakdown": "वित्तीय विवरण",
+      "transaction_history": "लेनदेन इतिहास",
+      "export_statement": "स्टेटमेंट निर्यात करें",
+      "search": "लेनदेन खोजें...",
+      "category": "श्रेणी",
+      "status": "स्थिति",
+      "date_range": "तिथि सीमा",
+      "date": "तिथि",
+      "type": "प्रकार",
+      "amount": "राशि",
+      "blockchain_repayments": "ब्लॉकचेन पुनर्भुगतान"
+    },
+    "goals": {
+      "title": "बचत लक्ष्य",
+      "create_goal": "नया लक्ष्य बनाएं",
+      "locked_savings": "लॉक की गई बचत",
+      "goal_name": "लक्ष्य का नाम",
+      "target_amount": "लक्षित राशि",
+      "deadline": "समय सीमा",
+      "progress": "प्रगति"
+    },
+    "literacy": {
+      "title": "वित्तीय साक्षरता",
+      "modules": "शिक्षण मॉड्यूल",
+      "start_course": "कोर्स शुरू करें",
+      "completed": "पूरा हुआ"
+    },
+    "directory": {
+      "title": "समूह निर्देशिका",
+      "members": "सदस्य",
+      "role": "भूमिका",
+      "joined": "शामिल हुए",
+      "contact": "संपर्क"
+    },
+    "messages": {
+      "title": "संदेश",
+      "type_message": "अपना संदेश टाइप करें...",
+      "send": "भेजें"
+    },
+    "achievements": {
+      "title": "उपलब्धियां",
+      "unlocked": "अनलॉक किया गया",
+      "locked": "लॉक किया गया",
+      "points": "अंक"
+    },
+    "profile": {
+      "title": "प्रोफ़ाइल",
+      "personal_info": "व्यक्तिगत जानकारी",
+      "edit": "प्रोफ़ाइल संपादित करें",
+      "save": "बदलाव सहेजें"
+    },
+    "monthly_round": {
+      "title": "मासिक राउंड",
+      "contribute": "योगदान करें",
+      "pay_savings": "बचत का भुगतान करें",
+      "pay_installments": "किश्तें चुकाएं",
+      "due_date": "देय तिथि"
+    }
+  },
+  "bn": {
+    "ledger": {
+      "total_contributed": "মোট অবদান",
+      "total_group_savings": "মোট গ্রুপ সঞ্চয়",
+      "loan_balance": "ঋণের স্থিতি",
+      "monthly_activity": "মাসিক কার্যকলাপ",
+      "financial_breakdown": "আর্থিক ভাঙ্গন",
+      "transaction_history": "লেনদেনের ইতিহাস",
+      "export_statement": "বিবৃতি রফতানি করুন",
+      "search": "অনুসন্ধান করুন...",
+      "category": "শ্রেণী",
+      "status": "অবস্থা",
+      "date_range": "তারিখের পরিসর",
+      "date": "তারিখ",
+      "type": "ধরন",
+      "amount": "পরিমাণ",
+      "blockchain_repayments": "ব্লকচেইন রিপেমেন্ট"
+    },
+    "goals": {
+      "title": "সঞ্চয় লক্ষ্য",
+      "create_goal": "নতুন লক্ষ্য তৈরি করুন",
+      "locked_savings": "লক করা সঞ্চয়",
+      "goal_name": "লক্ষ্যের নাম",
+      "target_amount": "লক্ষ্যের পরিমাণ",
+      "deadline": "সময়সীমা",
+      "progress": "অগ্রগতি"
+    },
+    "literacy": {
+      "title": "আর্থিক সাক্ষরতা",
+      "modules": "শিক্ষণ মডিউল",
+      "start_course": "কোর্স শুরু করুন",
+      "completed": "সম্পন্ন"
+    },
+    "directory": {
+      "title": "গ্রুপ ডিরেক্টরি",
+      "members": "সদস্য",
+      "role": "ভূমিকা",
+      "joined": "যোগদান",
+      "contact": "যোগাযোগ"
+    },
+    "messages": {
+      "title": "বার্তা",
+      "type_message": "আপনার বার্তা লিখুন...",
+      "send": "পাঠান"
+    },
+    "achievements": {
+      "title": "অর্জন",
+      "unlocked": "আনলক করা হয়েছে",
+      "locked": "লক করা হয়েছে",
+      "points": "পয়েন্ট"
+    },
+    "profile": {
+      "title": "প্রোফাইল",
+      "personal_info": "ব্যক্তিগত তথ্য",
+      "edit": "প্রোফাইল সম্পাদনা করুন",
+      "save": "পরিবর্তন সংরক্ষণ করুন"
+    },
+    "monthly_round": {
+      "title": "মাসিক রাউন্ড",
+      "contribute": "অবদান রাখুন",
+      "pay_savings": "সঞ্চয় প্রদান করুন",
+      "pay_installments": "কিস্তি প্রদান করুন",
+      "due_date": "প্রদেয় তারিখ"
+    }
+  },
+  "mr": {
+    "ledger": {
+      "total_contributed": "एकूण योगदान",
+      "total_group_savings": "एकूण गट बचत",
+      "loan_balance": "कर्ज शिल्लक",
+      "monthly_activity": "मासिक अ‍ॅक्टिव्हिटी",
+      "financial_breakdown": "आर्थिक तपशील",
+      "transaction_history": "व्यवहार इतिहास",
+      "export_statement": "स्टेटमेंट निर्यात करा",
+      "search": "शोधा...",
+      "category": "श्रेणी",
+      "status": "स्थिती",
+      "date_range": "तारीख श्रेणी",
+      "date": "तारीख",
+      "type": "प्रकार",
+      "amount": "रक्कम",
+      "blockchain_repayments": "ब्लॉकचेन परतफेड"
+    },
+    "goals": {
+      "title": "बचत उद्दिष्टे",
+      "create_goal": "नवीन उद्दिष्ट",
+      "locked_savings": "लॉक केलेली बचत",
+      "goal_name": "उद्दिष्टाचे नाव",
+      "target_amount": "लक्षित रक्कम",
+      "deadline": "अंतिम मुदत",
+      "progress": "प्रगती"
+    },
+    "literacy": {
+      "title": "आर्थिक साक्षरता",
+      "modules": "मॉड्यूल",
+      "start_course": "कोर्स सुरू करा",
+      "completed": "पूर्ण"
+    },
+    "directory": {
+      "title": "गट निर्देशिका",
+      "members": "सदस्य",
+      "role": "भूमिका",
+      "joined": "सामील झाले",
+      "contact": "संपर्क"
+    },
+    "messages": {
+      "title": "संदेश",
+      "type_message": "संदेश टाइप करा...",
+      "send": "पाठवा"
+    },
+    "achievements": {
+      "title": "यश",
+      "unlocked": "उघडलेले",
+      "locked": "बंद",
+      "points": "गुण"
+    },
+    "profile": {
+      "title": "प्रोफाइल",
+      "personal_info": "वैयक्तिक माहिती",
+      "edit": "संपादित करा",
+      "save": "जतन करा"
+    },
+    "monthly_round": {
+      "title": "मासिक राऊंड",
+      "contribute": "योगदान द्या",
+      "pay_savings": "बचत जमा करा",
+      "pay_installments": "हप्ते भरा",
+      "due_date": "देय तारीख"
+    }
+  },
+  "te": {
+    "ledger": {
+      "total_contributed": "మొత్తం విరాళం",
+      "total_group_savings": "మొత్తం గ్రూప్ పొదుపు",
+      "loan_balance": "రుణ బ్యాలెన్స్",
+      "monthly_activity": "నెలవారీ యాక్టివిటీ",
+      "financial_breakdown": "ఆర్థిక వివరాలు",
+      "transaction_history": "లావాదేవీల చరిత్ర",
+      "export_statement": "స్టేట్‌మెంట్ ఎగుమతి",
+      "search": "శోధించండి...",
+      "category": "వర్గం",
+      "status": "స్థితి",
+      "date_range": "తేదీ పరిధి",
+      "date": "తేదీ",
+      "type": "రకం",
+      "amount": "మొత్తం",
+      "blockchain_repayments": "బ్లాక్‌చెయిన్ చెల్లింపులు"
+    },
+    "goals": {
+      "title": "పొదుపు లక్ష్యాలు",
+      "create_goal": "కొత్త లక్ష్యం",
+      "locked_savings": "లాక్ చేయబడిన పొదుపు",
+      "goal_name": "లక్ష్యం పేరు",
+      "target_amount": "లక్ష్య మొత్తం",
+      "deadline": "గడువు",
+      "progress": "పురోగతి"
+    },
+    "literacy": {
+      "title": "ఆర్థిక అక్షరాస్యత",
+      "modules": "మాడ్యూల్స్",
+      "start_course": "కోర్సు ప్రారంభించు",
+      "completed": "పూర్తయింది"
+    },
+    "directory": {
+      "title": "గ్రూప్ డైరెక్టరీ",
+      "members": "సభ్యులు",
+      "role": "పాత్ర",
+      "joined": "చేరిన తేదీ",
+      "contact": "సంప్రదించండి"
+    },
+    "messages": {
+      "title": "సందేశాలు",
+      "type_message": "సందేశం టైప్ చేయండి...",
+      "send": "పంపండి"
+    },
+    "achievements": {
+      "title": "విజయాలు",
+      "unlocked": "అన్‌లాక్ చేయబడింది",
+      "locked": "లాక్ చేయబడింది",
+      "points": "పాయింట్లు"
+    },
+    "profile": {
+      "title": "ప్రొఫైల్",
+      "personal_info": "వ్యక్తిగత సమాచారం",
+      "edit": "సవరించండి",
+      "save": "సేవ్ చేయండి"
+    },
+    "monthly_round": {
+      "title": "నెలవారీ రౌండ్",
+      "contribute": "విరాళం ఇవ్వండి",
+      "pay_savings": "పొదుపు చెల్లించండి",
+      "pay_installments": "వాయిదాలు చెల్లించండి",
+      "due_date": "గడువు తేదీ"
+    }
+  },
+  "ta": {
+    "ledger": {
+      "total_contributed": "மொத்த பங்களிப்பு",
+      "total_group_savings": "குழு சேமிப்பு",
+      "loan_balance": "கடன் இருப்பு",
+      "monthly_activity": "மாதாந்திர செயல்பாடு",
+      "financial_breakdown": "நிதி விவரம்",
+      "transaction_history": "பரிவர்த்தனை வரலாறு",
+      "export_statement": "அறிக்கை ஏற்றுமதி",
+      "search": "தேடு...",
+      "category": "வகை",
+      "status": "நிலை",
+      "date_range": "தேதி வரம்பு",
+      "date": "தேதி",
+      "type": "வகை",
+      "amount": "பொருள்",
+      "blockchain_repayments": "பிளாக்செயின் திருப்பிச் செலுத்துதல்"
+    },
+    "goals": {
+      "title": "சேமிப்பு இலக்குகள்",
+      "create_goal": "புதிய இலக்கு",
+      "locked_savings": "பூட்டப்பட்ட சேமிப்பு",
+      "goal_name": "இலக்கு பெயர்",
+      "target_amount": "இலக்கு தொகை",
+      "deadline": "காலக்கெடு",
+      "progress": "முன்னேற்றம்"
+    },
+    "literacy": {
+      "title": "நிதி கல்வியறிவு",
+      "modules": "தொகுதிகள்",
+      "start_course": "தொடங்கு",
+      "completed": "நிறைவு"
+    },
+    "directory": {
+      "title": "குழு அடைவு",
+      "members": "உறுப்பினர்கள்",
+      "role": "பங்கு",
+      "joined": "இணைந்த தேதி",
+      "contact": "தொடர்பு"
+    },
+    "messages": {
+      "title": "செய்திகள்",
+      "type_message": "செய்தியை தட்டச்சு செய்யவும்...",
+      "send": "அனுப்பு"
+    },
+    "achievements": {
+      "title": "சாதனைகள்",
+      "unlocked": "திறக்கப்பட்டது",
+      "locked": "பூட்டப்பட்டுள்ளது",
+      "points": "புள்ளிகள்"
+    },
+    "profile": {
+      "title": "சுயவிவரம்",
+      "personal_info": "தனிப்பட்ட தகவல்",
+      "edit": "திருத்து",
+      "save": "சேமி"
+    },
+    "monthly_round": {
+      "title": "மாதாந்திர சுற்று",
+      "contribute": "பங்களி",
+      "pay_savings": "செலுத்து",
+      "pay_installments": "தவணைகள்",
+      "due_date": "காலக்கெடு"
+    }
+  },
+  "gu": {
+    "ledger": {
+      "total_contributed": "કુલ યોગદાન",
+      "total_group_savings": "જૂથ બચત",
+      "loan_balance": "લોન બેલેન્સ",
+      "monthly_activity": "માસિક પ્રવૃત્તિ",
+      "financial_breakdown": "નાણાકીય વિગતો",
+      "transaction_history": "ઇતિહાસ",
+      "export_statement": "નિકાસ",
+      "search": "શોધો...",
+      "category": "શ્રેણી",
+      "status": "સ્થિતિ",
+      "date_range": "તારીખ",
+      "date": "તારીખ",
+      "type": "પ્રકાર",
+      "amount": "રકમ",
+      "blockchain_repayments": "બ્લોકચેન ચુકવણી"
+    },
+    "goals": {
+      "title": "બચત લક્ષ્યો",
+      "create_goal": "નવો લક્ષ્ય",
+      "locked_savings": "લોક કરેલી બચત",
+      "goal_name": "લક્ષ્ય નામ",
+      "target_amount": "રકમ",
+      "deadline": "અંતિમ તારીખ",
+      "progress": "પ્રગતિ"
+    },
+    "literacy": {
+      "title": "નાણાકીય સાક્ષરતા",
+      "modules": "મોડ્યુલ",
+      "start_course": "શરૂ કરો",
+      "completed": "પૂર્ણ"
+    },
+    "directory": {
+      "title": "જૂથ નિર્દેશિકા",
+      "members": "સભ્યો",
+      "role": "ભૂમિકા",
+      "joined": "જોડાયા",
+      "contact": "સંપર્ક"
+    },
+    "messages": {
+      "title": "સંદેશા",
+      "type_message": "લખો...",
+      "send": "મોકલો"
+    },
+    "achievements": {
+      "title": "સિદ્ધિઓ",
+      "unlocked": "અનલૉક",
+      "locked": "લૉક",
+      "points": "પોઇન્ટ્સ"
+    },
+    "profile": {
+      "title": "પ્રોફાઇલ",
+      "personal_info": "માહિતી",
+      "edit": "ફેરફાર",
+      "save": "સાચવો"
+    },
+    "monthly_round": {
+      "title": "માસિક રાઉન્ડ",
+      "contribute": "યોગદાન",
+      "pay_savings": "ચૂકવો",
+      "pay_installments": "હપ્તા",
+      "due_date": "તારીખ"
+    }
+  },
+  "ur": {
+    "ledger": {
+      "total_contributed": "کل تعاون",
+      "total_group_savings": "گروپ کی بچت",
+      "loan_balance": "قرض کا بیلنس",
+      "monthly_activity": "ماہانہ سرگرمی",
+      "financial_breakdown": "مالیاتی تفصیلات",
+      "transaction_history": "تاریخ",
+      "export_statement": "ایکسپورٹ",
+      "search": "تلاش...",
+      "category": "زمرہ",
+      "status": "حیثیت",
+      "date_range": "رینج",
+      "date": "تاریخ",
+      "type": "قسم",
+      "amount": "رقم",
+      "blockchain_repayments": "بلاکچین ادائیگی"
+    },
+    "goals": {
+      "title": "اہداف",
+      "create_goal": "نیا ہدف",
+      "locked_savings": "لاکڈ بچت",
+      "goal_name": "نام",
+      "target_amount": "رقم",
+      "deadline": "آخری تاریخ",
+      "progress": "پیش رفت"
+    },
+    "literacy": {
+      "title": "خواندگی",
+      "modules": "ماڈیولز",
+      "start_course": "شروع کریں",
+      "completed": "مکمل"
+    },
+    "directory": {
+      "title": "ڈائریکٹری",
+      "members": "ممبران",
+      "role": "کردار",
+      "joined": "تاریخ",
+      "contact": "رابطہ"
+    },
+    "messages": {
+      "title": "پیغامات",
+      "type_message": "لکھیں...",
+      "send": "بھیجیں"
+    },
+    "achievements": {
+      "title": "کامیابیاں",
+      "unlocked": "انلاک",
+      "locked": "لاک",
+      "points": "پوائنٹس"
+    },
+    "profile": {
+      "title": "پروفائل",
+      "personal_info": "معلومات",
+      "edit": "ترمیم",
+      "save": "محفوظ"
+    },
+    "monthly_round": {
+      "title": "ماہانہ راؤنڈ",
+      "contribute": "تعاون",
+      "pay_savings": "ادائیگی",
+      "pay_installments": "قسطیں",
+      "due_date": "تاریخ"
+    }
+  },
+  "kn": {
+    "ledger": {
+      "total_contributed": "ಒಟ್ಟು ಕೊಡುಗೆ",
+      "total_group_savings": "ಒಟ್ಟು ಗುಂಪು ಉಳಿತಾಯ",
+      "loan_balance": "ಸಾಲದ ಬಾಕಿ",
+      "monthly_activity": "ಮಾಸಿಕ ಚಟುವಟಿಕೆ",
+      "financial_breakdown": "ಹಣಕಾಸು ವಿವರಣೆ",
+      "transaction_history": "ವಹಿವಾಟು ಇತಿಹಾಸ",
+      "export_statement": "ರಫ್ತು",
+      "search": "ಹುಡುಕಾಟ...",
+      "category": "ವರ್ಗ",
+      "status": "ಸ್ಥಿತಿ",
+      "date_range": "ದಿನಾಂಕದ ವ್ಯಾಪ್ತಿ",
+      "date": "ದಿನಾಂಕ",
+      "type": "ಪ್ರಕಾರ",
+      "amount": "ಮೊತ್ತ",
+      "blockchain_repayments": "ಬ್ಲಾಕ್‌ಚೈನ್ ಮರುಪಾವತಿಗಳು"
+    },
+    "goals": {
+      "title": "ಉಳಿತಾಯ ಗುರಿಗಳು",
+      "create_goal": "ಹೊಸ ಗುರಿ",
+      "locked_savings": "ಲಾಕ್ ಮಾಡಿದ ಉಳಿತಾಯ",
+      "goal_name": "ಗುರಿಯ ಹೆಸರು",
+      "target_amount": "ಗುರಿ ಮೊತ್ತ",
+      "deadline": "ಗಡುವು",
+      "progress": "ಪ್ರಗತಿ"
+    },
+    "literacy": {
+      "title": "ಆರ್ಥಿಕ ಸಾಕ್ಷರತೆ",
+      "modules": "ಮಾಡ್ಯೂಲ್ಗಳು",
+      "start_course": "ಪ್ರಾರಂಭಿಸಿ",
+      "completed": "ಪೂರ್ಣಗೊಂಡಿದೆ"
+    },
+    "directory": {
+      "title": "ಗುಂಪು ಡೈರೆಕ್ಟರಿ",
+      "members": "ಸದಸ್ಯರು",
+      "role": "ಪಾತ್ರ",
+      "joined": "ಸೇರಿದ ದಿನಾಂಕ",
+      "contact": "ಸಂಪರ್ಕ"
+    },
+    "messages": {
+      "title": "ಸಂದೇಶಗಳು",
+      "type_message": "ಟೈಪ್ ಮಾಡಿ...",
+      "send": "ಕಳುಹಿಸಿ"
+    },
+    "achievements": {
+      "title": "ಸಾಧನೆಗಳು",
+      "unlocked": "ಅನ್ಲಾಕ್",
+      "locked": "ಲಾಕ್",
+      "points": "ಪಾಯಿಂಟ್ಗಳು"
+    },
+    "profile": {
+      "title": "ಪ್ರೊಫೈಲ್",
+      "personal_info": "ಮಾಹಿತಿ",
+      "edit": "ತಿದ್ದುಪಡಿ",
+      "save": "ಉಳಿಸಿ"
+    },
+    "monthly_round": {
+      "title": "ಮಾಸಿಕ ಸುತ್ತು",
+      "contribute": "ಕೊಡುಗೆ ನೀಡಿ",
+      "pay_savings": "ಪಾವತಿಸಿ",
+      "pay_installments": "ಕಂತುಗಳು",
+      "due_date": "ದಿನಾಂಕ"
+    }
+  },
+  "od": {
+    "ledger": {
+      "total_contributed": "ମୋଟ ଅବଦାନ",
+      "total_group_savings": "ଗ୍ରୁପ୍ ସଞ୍ଚୟ",
+      "loan_balance": "ଋଣ ବାକି",
+      "monthly_activity": "ମାସିକ କାର୍ଯ୍ୟକଳାପ",
+      "financial_breakdown": "ଆର୍ଥିକ ବିବରଣୀ",
+      "transaction_history": "ଇତିହାସ",
+      "export_statement": "ରପ୍ତାନି",
+      "search": "ସନ୍ଧାନ...",
+      "category": "ଶ୍ରେଣୀ",
+      "status": "ସ୍ଥିତି",
+      "date_range": "ତାରିଖ ପରିସର",
+      "date": "ତାରିଖ",
+      "type": "ପ୍ରକାର",
+      "amount": "ପରିମାଣ",
+      "blockchain_repayments": "ବ୍ଲକଚେନ୍ ପେମେଣ୍ଟ"
+    },
+    "goals": {
+      "title": "ସଞ୍ଚୟ ଲକ୍ଷ୍ୟ",
+      "create_goal": "ନୂଆ ଲକ୍ଷ୍ୟ",
+      "locked_savings": "ଲକ୍ ସଞ୍ଚୟ",
+      "goal_name": "ନାମ",
+      "target_amount": "ପରିମାଣ",
+      "deadline": "ତାରିଖ",
+      "progress": "ପ୍ରଗତି"
+    },
+    "literacy": {
+      "title": "ଆର୍ଥିକ ସାକ୍ଷରତା",
+      "modules": "ମଡ୍ୟୁଲ୍",
+      "start_course": "ଆରମ୍ଭ",
+      "completed": "ସମ୍ପୂର୍ଣ୍ଣ"
+    },
+    "directory": {
+      "title": "ଡିରେକ୍ଟୋରୀ",
+      "members": "ସଦସ୍ୟ",
+      "role": "ଭୂମିକା",
+      "joined": "ତାରିଖ",
+      "contact": "ଯୋଗାଯୋଗ"
+    },
+    "messages": {
+      "title": "ବାର୍ତ୍ତା",
+      "type_message": "ଲେଖନ୍ତୁ...",
+      "send": "ପଠାନ୍ତୁ"
+    },
+    "achievements": {
+      "title": "ସଫଳତା",
+      "unlocked": "ଅନଲକ୍",
+      "locked": "ଲକ୍",
+      "points": "ପଏଣ୍ଟ"
+    },
+    "profile": {
+      "title": "ପ୍ରୋଫାଇଲ୍",
+      "personal_info": "ତଥ୍ୟ",
+      "edit": "ସମ୍ପାଦନ",
+      "save": "ସେଭ୍"
+    },
+    "monthly_round": {
+      "title": "ମାସିକ ରାଉଣ୍ଡ",
+      "contribute": "ଅବଦାନ",
+      "pay_savings": "ପେମେଣ୍ଟ",
+      "pay_installments": "କିସ୍ତି",
+      "due_date": "ତାରିଖ"
+    }
+  },
+  "ml": {
+    "ledger": {
+      "total_contributed": "ആകെ സംഭാവന",
+      "total_group_savings": "ഗ്രൂപ്പ് സമ്പാദ്യം",
+      "loan_balance": "ലോൺ ബാക്കി",
+      "monthly_activity": "പ്രതിമാസ പ്രവർത്തനം",
+      "financial_breakdown": "സാമ്പത്തിക വിവരങ്ങൾ",
+      "transaction_history": "ചരിത്രം",
+      "export_statement": "കയറ്റുമതി",
+      "search": "തിരയുക...",
+      "category": "വിഭാഗം",
+      "status": "നില",
+      "date_range": "തീയതി",
+      "date": "തീയതി",
+      "type": "തരം",
+      "amount": "തുക",
+      "blockchain_repayments": "ബ്ലോക്ക്ചെയിൻ പേയ്മെന്റ്"
+    },
+    "goals": {
+      "title": "ലക്ഷ്യങ്ങൾ",
+      "create_goal": "പുതിയ ലക്ഷ്യം",
+      "locked_savings": "ലോക്ക് ചെയ്ത സമ്പാദ്യം",
+      "goal_name": "പേര്",
+      "target_amount": "തുക",
+      "deadline": "തീയതി",
+      "progress": "പുരോഗതി"
+    },
+    "literacy": {
+      "title": "സാക്ഷരത",
+      "modules": "മൊഡ്യൂളുകൾ",
+      "start_course": "തുടങ്ങുക",
+      "completed": "പൂർത്തിയായി"
+    },
+    "directory": {
+      "title": "ഡയറക്ടറി",
+      "members": "അംഗങ്ങൾ",
+      "role": "പങ്ക്",
+      "joined": "തീയതി",
+      "contact": "ബന്ധപ്പെടുക"
+    },
+    "messages": {
+      "title": "സന്ദേശങ്ങൾ",
+      "type_message": "ടൈപ്പ് ചെയ്യുക...",
+      "send": "അയക്കുക"
+    },
+    "achievements": {
+      "title": "നേട്ടങ്ങൾ",
+      "unlocked": "അൺലോക്ക്",
+      "locked": "ലോക്ക്",
+      "points": "പോയിന്റുകൾ"
+    },
+    "profile": {
+      "title": "പ്രൊഫൈൽ",
+      "personal_info": "വിവരങ്ങൾ",
+      "edit": "തിരുത്തുക",
+      "save": "സൂക്ഷിക്കുക"
+    },
+    "monthly_round": {
+      "title": "പ്രതിമാസ റൗണ്ട്",
+      "contribute": "സംഭാവന",
+      "pay_savings": "അടക്കുക",
+      "pay_installments": "തവണകൾ",
+      "due_date": "തീയതി"
+    }
+  }
+}
